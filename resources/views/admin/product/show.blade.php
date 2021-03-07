@@ -24,7 +24,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Danh sách loại sản phẩm</h3>
+              <h3 class="card-title">Danh sách loại sản phẩm</h3><br>
+              <span><a href="/products/trash" style="font-size:20px">Trash</a></span>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -32,28 +33,42 @@
                 <thead>
                 <tr>
                   <th>STT</th>
-                  <th>Loại sản phẩm</th>
+                  <th>Sản phẩm</th>
+                  <th>Ảnh</th>
+                  <th>Mã code</th>
+                  <th>Màu</th>
+                  <th>Giá</th>
                   <th>Ngày tạo</th>
                   <th>Tùy chọn</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($category as $cat)
+                @foreach($product as $pro)
                 <tr>
-                  <td>{{$cat->id}}</td>
+                  <td>{{$pro->id}}</td>
                   <td>
-                      {{$cat->category_name}}
+                      {{$pro->product_name}}
                   </td>
-                  <td>{{$cat->created_at}}</td>
-                  <td><a href="{{url('category/edit/'.$cat->id)}}">Edit</a><a href="{{url('category/delete/'.$cat->id)}}"> Delete</a></td>
+                  <td><img src="{{asset('Product/large/'.$pro->image)}}" style="width:120px;"></td>
+                  <td>{{$pro->code}}</td>
+                  <td>{{$pro->color}}</td>
+                  <td>{{$pro->price}}</td>
+                  <td>{{$pro->created_at}}</td>
+                  <td><a href="{{url('product/edit/'.$pro->id)}}">Edit</a><a href="{{url('product/delete/'.$pro->id)}}" data-toggle="modal" data-id="{{$pro->id}}"
+                                    data-target="#delete-product-model"> Delete</a></td>
                   
                 </tr>
                 @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
+                
                 <th>STT</th>
-                  <th>Loại sản phẩm</th>
+                  <th>Sản phẩm</th>
+                  <th>Ảnh</th>
+                  <th>Mã code</th>
+                  <th>Màu</th>
+                  <th>Giá</th>
                   <th>Ngày tạo</th>
                   <th>Tùy chọn</th>
                   
@@ -73,4 +88,85 @@
     </section>
     <!-- /.content -->
   </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="delete-product-model" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure want to delete ?
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn-delete-product" type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+  
+    <form method="POST" name="delete-product-form">
+    {{csrf_field()}}
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var productId;
+            var deleteForm = document.forms['delete-product-form'];
+            var checkboxAll = $('#checkbox-all');
+            var productItemCheckbox = $('input[name="productIds[]"]');
+            var checkAllSubmitBtn = $('.check-all-submit-btn');
+            var containerForm = document.forms['container-form'];
+            $('#delete-product-model').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                productId = button.data('id'); //Get id
+            });
+            var btnDeleteProduct = document.getElementById('btn-delete-product');
+            btnDeleteProduct.onclick = function (event) {
+                deleteForm.action = 'product/delete/' + productId;
+                deleteForm.submit();
+            }
+            //Checlbox all changed
+            checkboxAll.change(function () {
+                var isCheckedAll = $(this).prop('checked');
+                productItemCheckbox.prop('checked', isCheckedAll);
+                renderCheckAllSubmitBtn();
+            })
+            //Product item checkbox changed
+            productItemCheckbox.change(function () {
+                var isCheckedAll = productItemCheckbox.length === $('input[name="productIds[]"]:checked').length;
+                checkboxAll.prop('checked', isCheckedAll);
+                renderCheckAllSubmitBtn();
+            })
+            checkAllSubmitBtn.click(function (e) {
+                e.preventDefault();
+                var isSubmitable = !$(this).hasClass('disabled');
+                
+                if (isSubmitable) {
+                    containerForm.submit();
+                }
+            })
+            checkAllSubmitBtn.on('submit', function (e) {
+                var isSubmitable = !$(this).hasClass('disabled');
+                if (!isSubmitable) {
+                    e.preventDefault();
+                }
+            })
+            //Render checkall submit button
+            function renderCheckAllSubmitBtn() {
+                var checkedCount = $('input[name="productIds[]"]:checked').length;
+                if (checkedCount > 0) {
+                    checkAllSubmitBtn.removeClass('disabled');
+                } else {
+                    checkAllSubmitBtn.addClass('disabled');
+                }
+            }
+        });
+    </script>
 @endsection

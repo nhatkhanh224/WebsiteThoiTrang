@@ -31,21 +31,54 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="POST" action="{{url('/category/edit/.$oldCategory->id')}}">
+              <form role="form" method="POST" action="/product/edit/{{$oldProduct->id}}" enctype="multipart/form-data">
               {{csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Loại sản phẩm</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập loại sản phẩm" name="category_name" value="{{$oldCategory->category_name}}">
+                    <label for="exampleInputEmail1">Sản phẩm</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập sản phẩm" name="product_name" value="{{$oldProduct->product_name}}">
                   </div>
                   <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Tiêu đề</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{$oldCategory->description}}</textarea>
-                 </div>
-                  
-                  
-                  
+                    <label for="exampleFormControlSelect1">Loại sản phẩm</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="id_category">
+                    <option value="">Chọn loại sản phẩm</option>
+                    @foreach ($category as $category)
+                      <option value="{{$category->id}}" @if($category->id == $oldProduct->id_category)
+                                  selected @endif>{{$category->category_name}}
+                      </option>
+                    @endforeach
+                    </select>
                 </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">Ảnh đại diện</label>
+                    <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image" value="{{$oldProduct->image}}">
+                        <input type="hidden" name="current_image" value="{{$oldProduct->image}}">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text" id="">Upload</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Miêu tả</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description">{{$oldProduct->description}}</textarea>
+                 </div>
+                 <div class="form-group">
+                    <label for="exampleInputEmail1">Code</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập mã code" name="code" value="{{$oldProduct->code}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Màu</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập màu" name="color" value="{{$oldProduct->color}}">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Giá</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá" name="price" value="{{$oldProduct->price}}">
+                  </div>
+              </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">

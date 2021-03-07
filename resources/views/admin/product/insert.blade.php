@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="POST" action="{{url('/category/insert')}}">
+              <form role="form" method="POST" action="{{url('/product/insert')}}" enctype="multipart/form-data">
               {{csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
@@ -41,14 +41,17 @@
                   <div class="form-group">
                     <label for="exampleFormControlSelect1">Loại sản phẩm</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="id_category">
-                    <option>1</option>
+                    <option value="">Chọn loại sản phẩm</option>
+                    @foreach ($category as $category)
+                    <option value="{{$category->id}}">{{$category->category_name}}</option>
+                    @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh đại diện</label>
                     <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile" name="thumbnail">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="image" name="image">
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
                       <div class="input-group-append">

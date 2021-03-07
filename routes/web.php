@@ -24,8 +24,9 @@ Route::match(['get', 'post'],'/category/insert', [CategoryController::class, 'in
 Route::match(['get', 'post'],'/category/edit/{id}', [CategoryController::class, 'edit']);
 Route::match(['get', 'post'],'/category/delete/{id}', [CategoryController::class, 'delete']);
 //PRODUCT
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index']);
 Route::match(['get', 'post'],'/product/insert', [ProductController::class, 'insert']);
 Route::match(['get', 'post'],'/product/edit/{id}', [ProductController::class, 'edit']);
 Route::match(['get', 'post'],'/product/delete/{id}', [ProductController::class, 'delete']);
+Route::get('/products/trash', [ProductController::class, 'trash']);
 

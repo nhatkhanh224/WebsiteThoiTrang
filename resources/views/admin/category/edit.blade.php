@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="POST" action="{{url('/category/edit/.$oldCategory->id')}}">
+              <form role="form" method="POST" action="/category/edit/{{$oldCategory->id}}">
               {{csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
