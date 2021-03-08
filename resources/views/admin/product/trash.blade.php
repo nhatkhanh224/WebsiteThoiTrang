@@ -32,7 +32,7 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>STT</th>
+                  
                   <th>Sản phẩm</th>
                   <th>Ảnh</th>
                   <th>Mã code</th>
@@ -45,7 +45,7 @@
                 <tbody>
                 @foreach($deletedProduct as $pro)
                 <tr>
-                  <td>{{$pro->id}}</td>
+                  
                   <td>
                       {{$pro->product_name}}
                   </td>
@@ -54,7 +54,7 @@
                   <td>{{$pro->color}}</td>
                   <td>{{$pro->price}}</td>
                   <td>{{$pro->created_at}}</td>
-                  <td><a href="{{url('product/delete/'.$pro->id)}}">Khôi phục</a><a href="{{url('product/delete/'.$pro->id)}}"> Xóa vĩnh viễn</a></td>
+                  <td><a href="{{url('product/restore/'.$pro->id)}}">Khôi phục</a><a href="{{url('product/destroy/'.$pro->id)}}"> Xóa vĩnh viễn</a></td>
                   
                 </tr>
                 @endforeach
@@ -62,7 +62,7 @@
                 <tfoot>
                 <tr>
                 
-                <th>STT</th>
+                
                   <th>Sản phẩm</th>
                   <th>Ảnh</th>
                   <th>Mã code</th>

@@ -25,14 +25,36 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Danh sách loại sản phẩm</h3><br>
-              <span><a href="/products/trash" style="font-size:20px">Trash</a></span>
+              <span><a href="/products/trash" style="font-size:20px">Thùng rác ({{$countDeletedProduct}})</a></span>
+              <div class="mt-4 d-flex align-items-center">
+              <div class="form-group ">
+                  <label for="exampleFormControlSelect1"></label>
+                  <select class="form-control form-control-sm checkbox-select-all-options" name="action"
+                      required>
+                      <option value="">--Action--</option>
+                      <option value="delete">Delete</option>
+                  </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-check-all check-all-submit-btn btn-sm disabled"
+                  style="margin-top: 10px;">Action</button>
             </div>
+            </div>
+             
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>STT</th>
+                  <th>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                          <input type="checkbox" class="form-check-input" id="checkbox-all"
+                              value="">Chọn tất cả
+                      </label>
+                    </div>
+                  </th>
+                  
+                  
                   <th>Sản phẩm</th>
                   <th>Ảnh</th>
                   <th>Mã code</th>
@@ -45,25 +67,31 @@
                 <tbody>
                 @foreach($product as $pro)
                 <tr>
-                  <td>{{$pro->id}}</td>
+                  <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="productIds[]"
+                            value="{{$pro->id}}" id="defaultCheck1">
+                    </div>
+                  </td>
+                  
                   <td>
                       {{$pro->product_name}}
                   </td>
                   <td><img src="{{asset('Product/large/'.$pro->image)}}" style="width:120px;"></td>
                   <td>{{$pro->code}}</td>
                   <td>{{$pro->color}}</td>
-                  <td>{{$pro->price}}</td>
+                  <td>{{$pro->price}} đ</td>
                   <td>{{$pro->created_at}}</td>
                   <td><a href="{{url('product/edit/'.$pro->id)}}">Edit</a><a href="{{url('product/delete/'.$pro->id)}}" data-toggle="modal" data-id="{{$pro->id}}"
-                                    data-target="#delete-product-model"> Delete</a></td>
+                  data-target="#delete-product-model"> Delete</a></td>
                   
                 </tr>
                 @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
-                
-                <th>STT</th>
+                  <th>Chọn tất cả</th>
+                  
                   <th>Sản phẩm</th>
                   <th>Ảnh</th>
                   <th>Mã code</th>
@@ -147,15 +175,14 @@
             checkAllSubmitBtn.click(function (e) {
                 e.preventDefault();
                 var isSubmitable = !$(this).hasClass('disabled');
-                
                 if (isSubmitable) {
-                    containerForm.submit();
+                  containerForm.submit();
                 }
             })
             checkAllSubmitBtn.on('submit', function (e) {
                 var isSubmitable = !$(this).hasClass('disabled');
                 if (!isSubmitable) {
-                    e.preventDefault();
+                  e.preventDefault();
                 }
             })
             //Render checkall submit button

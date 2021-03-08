@@ -11,7 +11,8 @@ class ProductController extends Controller
 {
     public function index(){
         $product=Product::all();
-        return view('admin/product/show')->with(compact('product'));
+        $countDeletedProduct=Product::onlyTrashed()->count();
+        return view('admin/product/show')->with(compact('product','countDeletedProduct'));
     }
     public function insert(Request $request){
         $category=Category::all();
@@ -85,4 +86,13 @@ class ProductController extends Controller
         $deletedProduct=Product::onlyTrashed()->get();
         return view('admin/product/trash')->with(compact('deletedProduct'));
     }
+    public function restore($id=null) {
+        Product::where(['id'=>$id])->restore();
+        return redirect('/products');
+    }
+    public function destroy($id=null) {
+        Product::where(['id'=>$id])->forceDelete();
+        return redirect('/products');
+    }
+
 }

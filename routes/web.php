@@ -29,4 +29,5 @@ Route::match(['get', 'post'],'/product/insert', [ProductController::class, 'inse
 Route::match(['get', 'post'],'/product/edit/{id}', [ProductController::class, 'edit']);
 Route::match(['get', 'post'],'/product/delete/{id}', [ProductController::class, 'delete']);
 Route::get('/products/trash', [ProductController::class, 'trash']);
-
+Route::match(['get', 'post'],'/product/restore/{id}', [ProductController::class, 'restore']);
+Route::match(['get', 'post'],'/product/destroy/{id}', [ProductController::class, 'destroy']);
