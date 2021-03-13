@@ -16,7 +16,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/',[HomeController::class,'index']);
+
 Route::get('/dashboard', [AdminController::class, 'index']);
 //CATEGORY
 Route::get('/category', [CategoryController::class, 'index']);
@@ -31,3 +31,6 @@ Route::match(['get', 'post'],'/product/delete/{id}', [ProductController::class, 
 Route::get('/products/trash', [ProductController::class, 'trash']);
 Route::match(['get', 'post'],'/product/restore/{id}', [ProductController::class, 'restore']);
 Route::match(['get', 'post'],'/product/destroy/{id}', [ProductController::class, 'destroy']);
+//Web
+Route::get('/',[HomeController::class,'index']);
+Route::get('/{slug}',[HomeController::class,'detail']);

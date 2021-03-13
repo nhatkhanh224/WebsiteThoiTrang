@@ -1,14 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Student;
+use App\Models\Product;
 
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     function index(){
-        $student=Student::all();
-        return view('student/show')->with(compact('student'));
+        $product=Product::all();
+        return view('web/index')->with(compact('product'));
     }
+    function detail(Request $request,$slug=null){
+        $product=Product::where('product_name',$slug);
+        return view('web/detail')->with(compact('product'));
+        
+    }
+    
 }
