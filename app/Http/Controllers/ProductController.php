@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ImageProduct;
 use Intervention\Image\Facades\Image as Image;
 
 class ProductController extends Controller
@@ -93,6 +94,42 @@ class ProductController extends Controller
     public function destroy($id=null) {
         Product::where(['id'=>$id])->forceDelete();
         return redirect('/products');
+    }
+    public function insert_image(Request $request,$id=null) {
+        $product=Product::find($id);
+        $productImg=ImageProduct::where('id_product',$id)->get();
+        if ($request->isMethod('POST')) {
+            $img=new ImageProduct();
+            $data=$request->all();
+            $img->id_product=$id;
+            if ($request->hasFile('image')) {
+                $img_tmp=$request->image;
+                // echo "<pre>";print_r($img_tmp);die;
+                if ($img_tmp->isValid()) {
+                    $extension=$img_tmp->getClientOriginalExtension();
+                    $filename=rand(111,99999).'.'.$extension;
+                    $large_image_path='Product/large/'.$filename;
+                    $medium_image_path='Product/medium/'.$filename;
+                    $small_image_path='Product/small/'.$filename;
+                    Image::make($img_tmp)->save($large_image_path);
+                    Image::make($img_tmp)->resize(600,600)->save($medium_image_path);
+                    Image::make($img_tmp)->resize(300,300)->save($small_image_path);
+                    $img->image=$filename;
+                    
+                }
+            }
+            $img->save();
+            return redirect()->back();
+            
+        }
+        return view('admin/product/insert_image')->with(compact('product','productImg'));
+    }
+    public function delete_product_image($id=null){
+        if (!empty($id)) {
+           ImageProduct::where('id',$id)->delete();
+           return redirect()->back();
+           
+        }
     }
 
 }

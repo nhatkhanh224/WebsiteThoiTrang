@@ -82,8 +82,8 @@
                   <td>{{$pro->color}}</td>
                   <td>{{$pro->price}} đ</td>
                   <td>{{$pro->created_at}}</td>
-                  <td><a href="{{url('product/edit/'.$pro->id)}}">Edit</a><a href="{{url('product/delete/'.$pro->id)}}" data-toggle="modal" data-id="{{$pro->id}}"
-                  data-target="#delete-product-model"> Delete</a></td>
+                  <td><a href="{{url('product/edit/'.$pro->id)}}">Edit <i class="fas fa-edit"></i></a><a href="{{url('product/delete/'.$pro->id)}}" data-toggle="modal" data-id="{{$pro->id}}"
+                  data-target="#delete-product-model"> Delete <i class="fas fa-trash"></i></a><a href="{{url('product/insert-image/'.$pro->id)}}"> Add more pictures <i class="far fa-images"></i></a></td>
                   
                 </tr>
                 @endforeach

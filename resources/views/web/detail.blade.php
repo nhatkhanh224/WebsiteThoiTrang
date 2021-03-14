@@ -1,34 +1,52 @@
-@extends('layouts.frontLayouts.web')
-@section('content')
-<div class="product">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dirty Coins</title>
+    <link
+      rel="shortcut icon"
+      href="//bizweb.dktcdn.net/100/369/010/themes/752396/assets/favicon.png?1605610691002"
+      type="image/png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{{asset('web/css/detail.css')}}" />
+    <link rel="stylesheet" href="{{asset('web/css/responsive.css')}}" />
+  </head>
+  <body>
+    <div id="overlay" onclick="off()"></div>
+    <div class="app">
+      @include('layouts.frontLayouts.header')
+      <!-- End Header -->
+      <div class="product">
         <div class="container">
           <div class="row">
             <div class="col-md-8 col-xs-12 col-sm-12">
               <div class="product-image">
                 <img
-                  src="https://bizweb.dktcdn.net/100/369/010/products/xv.jpg?v=1603948518243"
-                  alt=""
+                  src="{{asset('Product/large/'.$product->image)}}"
+                  alt="" 
                 />
               </div>
               <div class="product-image-small">
+              @foreach($image_product as $image)
                 <img
-                  src="https://bizweb.dktcdn.net/100/369/010/products/monarch-print-shirt-2-w.jpg?v=1592668368750"
-                  onclick="changeImage('1')"
-                  id="1"
+                  src="{{asset('Product/large/'.$image->image)}}"
+                  onclick="changeImage('{{$image->id}}')"
+                  id="{{$image->id}}"
                   alt=""
                 />
-                <img
-                  src="https://bizweb.dktcdn.net/100/369/010/products/monarch-print-shirt-2-w.jpg?v=1592668368750"
-                  onclick="changeImage('2')"
-                  alt=""
-                  id="2"
-                />
-                <img
-                  src="https://bizweb.dktcdn.net/100/369/010/products/monarch-print-shirt-2-w.jpg?v=1592668368750"
-                  onclick="changeImage('3')"
-                  alt=""
-                  id="3"
-                />
+              @endforeach
               </div>
             </div>
 
@@ -50,8 +68,8 @@
                     <option>Trắng</option>
                   </select>
                 </div>
-                <button class="product-detail-button">THÊM VÀO GIỎ</button>
-                <button class="product-detail-button add-to-cart">MUA NGAY</button>
+                <button class="product-button">THÊM VÀO GIỎ</button>
+                <button class="product-button add-to-cart">MUA NGAY</button>
                 <div class="product-detail">
                   <p>Chi tiết sản phẩm:</p>
                   <ul>
@@ -176,4 +194,9 @@
           </div>
         </div>
       </div>
-@endsection
+      @include('layouts.frontLayouts.footer')
+    </div>
+  </body>
+  <script src="{{asset('web/js/multislider.js')}}"></script>
+  <script src="{{asset('web/js/detail.js')}}"></script>
+</html>

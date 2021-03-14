@@ -75,10 +75,7 @@
                     <label for="exampleInputEmail1">Giá</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá" name="price">
                   </div>
-                  
-                  
-                  
-                </div>
+              </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">

@@ -11,10 +11,14 @@ class Product extends Model
     use SoftDeletes;
     protected $table='product';
     protected $primaryKey='id';
-    protected $fillable=['id_category','product_name','image','code','color','description','price'];
+    protected $fillable=['id_category','product_name','image','code','color','description','price','slug'];
     protected $dates = ['deleted_at'];
     public function category()
     {
        return $this->hasOne('App\Models\Category');
+    }
+    public function image()
+    {
+       return $this->hasMany('App\Models\ImageProduct');
     }
 }
