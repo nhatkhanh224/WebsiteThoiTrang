@@ -25,7 +25,8 @@
   <body>
     <div id="overlay" onclick="off()"></div>
     <div class="app">
-        @include('layouts.frontLayouts.header')
+        @include('layouts.frontLayouts.header',['categories'=>\App\Models\Category::all()])
+
         <div class="slide">
         <div id="demo" class="carousel slide" data-ride="carousel">
           <ul class="carousel-indicators">
@@ -105,7 +106,7 @@
           @foreach($product as $pro)
             <div class="col-lg-4 col-md-4 col-sm-6 col-6">
               <div class="product-main">
-              <a href="/{{$pro->slug}}">
+              <a href="product/{{$pro->slug}}">
                 <img
                   class="product-image"
                   src="{{asset('Product/large/'.$pro->image)}}"
@@ -113,7 +114,7 @@
                 />
                 </a>
                 <p class="product-name">{{$pro->product_name}}</p>
-                <p class="product-price">{{$pro->price}} đ</p>
+                <p class="product-price"><?php echo number_format($pro->price, 0, '', ','); ?> đ</p>
               </div>
             </div>
           @endforeach
@@ -159,7 +160,7 @@
           @foreach($product as $pro)
             <div class="col-lg-4 col-md-4 col-sm-6 col-6">
               <div class="product-main">
-                <a href="/{{$pro->product_name}}">
+                <a href="product/{{$pro->slug}}">
                 <img
                   class="product-image"
                   src="{{asset('Product/large/'.$pro->image)}}"
@@ -167,7 +168,7 @@
                 />
                 </a>
                 <p class="product-name">{{$pro->product_name}}</p>
-                <p class="product-price">{{$pro->price}} đ</p>
+                <p class="product-price"><?php echo number_format($pro->price, 0, '', ','); ?> đ</p>
               </div>
             </div>
           @endforeach

@@ -18,17 +18,11 @@
                   <li class="header-navbar-item">
                     <a class="header-navbar-item-link" href="">SHOP</a>
                     <ul class="sub-menu">
+                      @foreach ($categories as $cat)
                       <li class="sub-menu-item">
-                        <a href="">TOPS</a>
-                        <!-- <ul class="sub-menu-item-sub">
-                          <li><a href="">T-SHIRTS & POLO SHIRTS</a></li>
-                          <li><a href="">SHIRTS</a></li>
-                        </ul> -->
+                        <a href="/category/{{$cat->slug}}">{{$cat->category_name}}</a>
                       </li>
-                      <li class="sub-menu-item"><a href="">BOTTOM</a></li>
-                      <li class="sub-menu-item"><a href="">ACCESSORIES</a></li>
-                      <li class="sub-menu-item"><a href="">BAGS</a></li>
-                      <li class="sub-menu-item"><a href="">SALE</a></li>
+                      @endforeach
                     </ul>
                   </li>
                   <li class="header-navbar-item">
@@ -106,8 +100,9 @@
                     </a>
                   </li>
                   <li class="header-information-item">
-                    <a href="header-information-item-link">
+                    <a href="/cart">
                       <i
+
                         class="fas fa-shopping-cart header-information-item-font"
                       ></i>
                     </a>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dirty Coins</title>
+    <link
+      rel="shortcut icon"
+      href="//bizweb.dktcdn.net/100/369/010/themes/752396/assets/favicon.png?1605610691002"
+      type="image/png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{{asset('web/css/cart.css')}}" />
+    <link rel="stylesheet" href="{{asset('web/css/responsive.css')}}" />
+  </head>
+  <body>
+    <div id="overlay" onclick="off()"></div>
+    <div class="app">
+    @include('layouts.frontLayouts.header',['categories'=>\App\Models\Category::all()])
+      <!-- End Header -->
+      <div class="cart">
+        <div class="container">
+          <h3 class="cart-title">GIỎ HÀNG</h3>
+          <div class="row">
+            <div class="col-md-8">
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th scope="col">Sản phẩm</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Xóa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>
+                      <img
+                        class="cart-img"
+                        src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
+                        alt=""
+                      />
+                      <p class="cart-product-name">
+                        Monarch Butterfly T-shirt - Black
+                      </p>
+                      <span class="cart-product-price">60000đ</span>
+                    </th>
+                    <td class="qty">
+                      <div class="qty-number">
+                        <input
+                          type="button"
+                          value="<"
+                          class="qtyminus"
+                          field="quantity"
+                        />
+                        <input
+                          type="text"
+                          size="4"
+                          name="quantity"
+                          value="1"
+                          class="tc item-quantity eventnone qty"
+                        />
+                        <input type="button" value=">" class="qtyplus" field="quantity">
+                      </div>
+                    </td>
+                    <td>60000đ</td>
+                    <td><i class="far fa-trash-alt"></i></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-4">
+                <div class="total-cart">
+                    <div class="subtotal">
+                        <span>Tổng tiền</span>
+                        <span class="total">60000đ</span>
+                    </div>
+                    <div class="final-total">
+                        <button>Thanh toán</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="continue-buy">
+            <button class="continue-buy-button"><a href="">Tiếp tục mua sắm</a></button>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      @include('layouts.frontLayouts.footer')
+
+    </div>
+  </body>
+  <script src="{{asset('web/js/cart.js')}}"></script>
+</html>

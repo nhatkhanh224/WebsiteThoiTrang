@@ -26,7 +26,7 @@
   <body>
     <div id="overlay" onclick="off()"></div>
     <div class="app">
-      @include('layouts.frontLayouts.header')
+    @include('layouts.frontLayouts.header',['categories'=>\App\Models\Category::all()])
       <!-- End Header -->
       <div class="product">
         <div class="container">
@@ -52,8 +52,8 @@
 
             <div class="col-md-4 col-xs-12 col-sm-12">
               <div class="product-information">
-                <h1>BXD - MONOGRAM SHIRT/BLACK</h1>
-                <span class="product-price">500,000đ</span>
+                <h1>{{$product->product_name}}</h1>
+                <span class="product-price"><?php echo number_format($product->price, 0, '', ','); ?> đ</span>
                 <div class="form-group">
                   <select class="form-control" id="sel1">
                     <option>S</option>
@@ -64,8 +64,8 @@
                 </div>
                 <div class="form-group">
                   <select class="form-control" id="sel1">
-                    <option>Đen</option>
-                    <option>Trắng</option>
+                    <option>{{$product->color}}</option>
+                    
                   </select>
                 </div>
                 <button class="product-button">THÊM VÀO GIỎ</button>
@@ -73,7 +73,7 @@
                 <div class="product-detail">
                   <p>Chi tiết sản phẩm:</p>
                   <ul>
-                    <li>100% Polyester</li>
+                    <li>{{$product->description}}</li>
                   </ul>
                 </div>
               </div>

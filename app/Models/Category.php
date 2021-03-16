@@ -10,7 +10,7 @@ class Category extends Model
     
     protected $table='category';
     protected $primaryKey='id';
-    protected $fillable=['category_name','description'];
+    protected $fillable=['category_name','description','slug'];
     public function product()
     {
        return $this->hasMany('App\Models\Product');

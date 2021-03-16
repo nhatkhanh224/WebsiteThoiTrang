@@ -108,6 +108,9 @@ display: block;
   font-size: 18px;
 
 }
+.product-image{
+  margin-bottom: 15px;
+}
 .product-image img {
   width: 100%;
 }
