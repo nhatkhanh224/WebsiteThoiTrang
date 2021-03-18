@@ -3,7 +3,7 @@
           <div class="row">
             <div class="col-md-2">
               <div class="header-logo">
-                <a href=""
+                <a href="/"
                   ><img
                     class="header-logo-img"
                     src="https://bizweb.dktcdn.net/100/369/010/themes/752396/assets/logo.png?1605325979443"

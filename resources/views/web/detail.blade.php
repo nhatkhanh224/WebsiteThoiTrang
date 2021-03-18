@@ -49,13 +49,21 @@
               @endforeach
               </div>
             </div>
-
+          
             <div class="col-md-4 col-xs-12 col-sm-12">
-              <div class="product-information">
+            <form action="{{url('/addToCart')}}" method="POST">
+            {{csrf_field()}}
+            <div class="product-information">
+                <input type="hidden" name="id_product" value="{{$product->id}}" />
+                <input type="hidden" name="product_name" value="{{$product->product_name}}" />
+                <input type="hidden" name="product_code" value="{{$product->code}}" />
+                <input type="hidden" name="thumbnail" value="{{$product->image}}" />
+                <input type="hidden" name="price" value="{{$product->price}}" />
+                
                 <h1>{{$product->product_name}}</h1>
                 <span class="product-price"><?php echo number_format($product->price, 0, '', ','); ?> đ</span>
                 <div class="form-group">
-                  <select class="form-control" id="sel1">
+                  <select class="form-control" id="sel1" name="size">
                     <option>S</option>
                     <option>M</option>
                     <option>L</option>
@@ -63,12 +71,12 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <select class="form-control" id="sel1">
+                  <select class="form-control" id="sel1" name="color">
                     <option>{{$product->color}}</option>
                     
                   </select>
                 </div>
-                <button class="product-button">THÊM VÀO GIỎ</button>
+                <button type="submit" class="product-button">THÊM VÀO GIỎ</button>
                 <button class="product-button add-to-cart">MUA NGAY</button>
                 <div class="product-detail">
                   <p>Chi tiết sản phẩm:</p>
@@ -77,6 +85,8 @@
                   </ul>
                 </div>
               </div>
+            </form>
+              
             </div>
           </div>
         </div>

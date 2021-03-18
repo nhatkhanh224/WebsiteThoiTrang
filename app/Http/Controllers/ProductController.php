@@ -42,6 +42,8 @@ class ProductController extends Controller
                     
                 }
             }
+            $slug=preg_replace('/\s+/', '-', $data['product_name']);
+            $product->slug=strtolower($slug);
             $product->save();
             return redirect('/products');
         }
@@ -128,7 +130,6 @@ class ProductController extends Controller
         if (!empty($id)) {
            ImageProduct::where('id',$id)->delete();
            return redirect()->back();
-           
         }
     }
 

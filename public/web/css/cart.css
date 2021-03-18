@@ -130,6 +130,9 @@
   padding: 30px 101px;
   border-top: 1px solid #eee;
 }
+.final-total button{
+  width: 148px;
+}
 .final-total button,
 .continue-buy-button {
   display: inline-block;

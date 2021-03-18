@@ -36,7 +36,7 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Sản phẩm</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập sản phẩm" name="product_name">
+                    <input type="text" class="form-control productName" id="exampleInputEmail1" placeholder="Nhập sản phẩm" name="product_name">
                   </div>
                   <div class="form-group">
                     <label for="exampleFormControlSelect1">Loại sản phẩm</label>
@@ -75,6 +75,7 @@
                     <label for="exampleInputEmail1">Giá</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá" name="price">
                   </div>
+                  
               </div>
                 <!-- /.card-body -->
 
@@ -96,4 +97,6 @@
     </section>
     <!-- /.content -->
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
 @endsection

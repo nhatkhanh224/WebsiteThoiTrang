@@ -46,6 +46,7 @@
     .banner-image {
       margin-top: 14px;
     }
+    
     .product-button {
       left: 32%;
     }
@@ -55,9 +56,9 @@
     #mixedSlider .MS-content .item{
       width: 50%;
     }
-    .final-total{
-      padding: 30px 181px;
-    }
+    .final-total {
+      padding: 30px 144px;  
+  }
     .qty-number{
       display: flex;
     }

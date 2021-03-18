@@ -29,7 +29,7 @@
     @include('layouts.frontLayouts.header',['categories'=>\App\Models\Category::all()])
       <!-- End Header -->
       <div class="header-banner">
-        <h1 class="header-banner-title">SHIRTS</h1>
+        <h1 class="header-banner-title"><?php echo strtoupper($category->slug) ?></h1>
       </div>
       <div class="container">
         <div class="option">
