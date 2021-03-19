@@ -43,17 +43,23 @@
                   </tr>
                 </thead>
                 <tbody>
+                @if(is_null($cart))
+                
+                <span>Không có sản phẩm <a href="/">Quay lại trang chủ</a></span>
+                @else
+                @foreach($cart as $cart)
                   <tr>
                     <th>
                       <img
                         class="cart-img"
-                        src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
+                        src="{{asset('Product/large/'.$cart->thumbnail)}}"
                         alt=""
+                        
                       />
                       <p class="cart-product-name">
-                        Monarch Butterfly T-shirt - Black
+                        {{$cart->product_name}}
                       </p>
-                      <span class="cart-product-price">60000đ</span>
+                      <span class="cart-product-price"><?php echo number_format($cart->price, 0, '', ','); ?> đ</span>
                     </th>
                     <td class="qty">
                       <div class="qty-number">
@@ -76,6 +82,9 @@
                     <td>60000đ</td>
                     <td><i class="far fa-trash-alt"></i></td>
                   </tr>
+                @endforeach
+                @endif
+
                 </tbody>
               </table>
             </div>
@@ -92,7 +101,7 @@
             </div>
           </div>
           <div class="continue-buy">
-            <button class="continue-buy-button"><a href="">Tiếp tục mua sắm</a></button>
+            <button class="continue-buy-button"><a href="/">Tiếp tục mua sắm</a></button>
           </div>
           
         </div>

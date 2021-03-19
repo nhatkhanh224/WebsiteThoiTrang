@@ -6,15 +6,31 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use Session;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 
 class CartController extends Controller
 {
    public function index(){
-       return view('web/cart');
+        $cartCookie=Cookie::get('cart');
+        if ($cartCookie) {
+            $cart=Cart::where('session_id',$cartCookie)->get();
+        }else{
+            $cart=null;
+        }
+        return view('web/cart')->with(compact('cart'));
    }
    public function addToCart(Request $request){
-       $session_id=Str::random(40);
-       Session::put('session_id',$session_id);
+       $cartCookie=$request->cookies->get('cart');
+       if ($cartCookie) {
+           $session_id=$cartCookie;
+       }
+       else {
+        $session_id=Str::random(40);
+        Cookie::queue('cart',$session_id,2592000);
+        $cartCookie=Cookie::get('cart');
+       }
+    
+    //    echo "<pre>";print_r($cartCookie);die;
        if ($request->isMethod('POST')) {
            $data=$request->all();
            $cart = new Cart();
@@ -26,7 +42,12 @@ class CartController extends Controller
            $cart->size=$data['size'];
            $cart->color=$data['color'];
            $cart->quantum=1;
-           $cart->session_id=$session_id;
+           if ($cartCookie) {
+               $cart->session_id=$cartCookie;
+           }
+           else{
+            $cart->session_id=$session_id;
+           }
            $cart->save();
            return redirect('/cart');
        }
