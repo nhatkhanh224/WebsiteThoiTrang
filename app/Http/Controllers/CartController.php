@@ -52,4 +52,11 @@ class CartController extends Controller
            return redirect('/cart');
        }
     }
+    public function updateQuantity($id=null,$number=null){
+        $cart=Cart::where('id',$id)->first();
+        $quantum=$cart->quantum;
+        $quantum+=$number;
+        Cart::where('id',$id)->update(['quantum'=>$quantum]);
+        return redirect('/cart');
+    }
 }

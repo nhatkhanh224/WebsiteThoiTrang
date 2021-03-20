@@ -63,20 +63,24 @@
                     </th>
                     <td class="qty">
                       <div class="qty-number">
+                        @if($cart->quantum>1)
                         <input
                           type="button"
                           value="<"
                           class="qtyminus"
                           field="quantity"
+                          onclick="minus('{{$cart->id}}');"
                         />
+                        @endif
                         <input
                           type="text"
                           size="4"
                           name="quantity"
-                          value="1"
+                          value="{{$cart->quantum}}"
                           class="tc item-quantity eventnone qty"
+                          style="text-align: center;"
                         />
-                        <input type="button" value=">" class="qtyplus" field="quantity">
+                        <input type="button" value=">" class="qtyplus" field="quantity" onclick="plus('{{$cart->id}}');">
                       </div>
                     </td>
                     <td>60000đ</td>
@@ -113,4 +117,24 @@
     </div>
   </body>
   <script src="{{asset('web/js/cart.js')}}"></script>
+  <script>
+  function minus(id){
+    $.ajax({
+      type: "GET",
+      url: '/cart/update/'+id+'/-1',
+      success : function(result) {
+							window.location.href = "/cart";
+			},
+    })
+  }
+  function plus(id){
+    $.ajax({
+      type: "GET",
+      url: '/cart/update/'+id+'/1',
+      success : function(result) {
+							window.location.href = "/cart";
+			},
+    })
+  }
+</script>
 </html>
