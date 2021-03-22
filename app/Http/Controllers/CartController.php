@@ -59,4 +59,10 @@ class CartController extends Controller
         Cart::where('id',$id)->update(['quantum'=>$quantum]);
         return redirect('/cart');
     }
+    public function deleteCart($id=null){
+        if (!empty($id)) {
+            Cart::where('id',$id)->delete();
+            return redirect('/cart');
+        }
+    }
 }

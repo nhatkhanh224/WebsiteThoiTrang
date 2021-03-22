@@ -31,7 +31,9 @@
       <div class="cart">
         <div class="container">
           <h3 class="cart-title">GIỎ HÀNG</h3>
+          <form action="">
           <div class="row">
+          
             <div class="col-md-8">
               <table class="table ">
                 <thead>
@@ -43,10 +45,12 @@
                   </tr>
                 </thead>
                 <tbody>
+                
                 @if(is_null($cart))
                 
                 <span>Không có sản phẩm <a href="/">Quay lại trang chủ</a></span>
                 @else
+                <?php $total=0; ?>
                 @foreach($cart as $cart)
                   <tr>
                     <th>
@@ -83,8 +87,12 @@
                         <input type="button" value=">" class="qtyplus" field="quantity" onclick="plus('{{$cart->id}}');">
                       </div>
                     </td>
-                    <td>60000đ</td>
-                    <td><i class="far fa-trash-alt"></i></td>
+                    <td><?php echo number_format($cart->price*$cart->quantum, 0, '', ','); ?> đ</td>
+                    <td><a href="{{url('/cart/delete/'.$cart->id)}}" style="color:black"><i class="far fa-trash-alt"></i></a></td>
+                    <?php
+                    
+                    $total=$total+($cart->price*$cart->quantum);
+                    ?>
                   </tr>
                 @endforeach
                 @endif
@@ -96,7 +104,9 @@
                 <div class="total-cart">
                     <div class="subtotal">
                         <span>Tổng tiền</span>
-                        <span class="total">60000đ</span>
+                        <span class="total"><?php 
+                        echo number_format($total, 0, '', ',');
+                         ?>đ</span>
                     </div>
                     <div class="final-total">
                         <button>Thanh toán</button>
@@ -104,6 +114,8 @@
                 </div>
             </div>
           </div>
+          </form>
+          
           <div class="continue-buy">
             <button class="continue-buy-button"><a href="/">Tiếp tục mua sắm</a></button>
           </div>

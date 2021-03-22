@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,17 +33,18 @@ Route::match(['get', 'post'],'/product/edit/{id}', [ProductController::class, 'e
 Route::match(['get', 'post'],'/product/delete/{id}', [ProductController::class, 'delete']);
 Route::match(['get', 'post'],'/product/insert-image/{id}', [ProductController::class, 'insert_image']);
 Route::match(['get', 'post'],'/product/image/delete/{id}', [ProductController::class, 'delete_product_image']);
-
 Route::get('/products/trash', [ProductController::class, 'trash']);
 Route::match(['get', 'post'],'/product/restore/{id}', [ProductController::class, 'restore']);
 Route::match(['get', 'post'],'/product/destroy/{id}', [ProductController::class, 'destroy']);
 //Web
 Route::get('/',[HomeController::class,'index']);
-
 Route::get('/category/{slug}',[HomeController::class,'productByCategory']);
 Route::get('/product/{slug}',[HomeController::class,'detail']);
 Route::match(['get', 'post'],'/addToCart', [CartController::class, 'addToCart']);
 Route::match(['get', 'post'],'/cart', [CartController::class, 'index']);
 Route::match(['get', 'post'],'/cart/update/{id}/{number}', [CartController::class, 'updateQuantity']);
+Route::match(['get', 'post'],'/cart/delete/{id}', [CartController::class, 'deleteCart']);
+//Account
+Route::get('/account',[UserController::class,'index']);
 
 
