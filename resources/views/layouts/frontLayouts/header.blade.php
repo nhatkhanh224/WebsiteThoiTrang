@@ -81,7 +81,7 @@
                     <a href="">ABOUT</a>
                   </li>
                   <li>
-                    <a href="">Đăng ký / đăng nhập</a>
+                    <a href="/account">Đăng ký / đăng nhập</a>
                   </li>
                 </ul>
               </div>
@@ -95,7 +95,7 @@
                     </a>
                   </li>
                   <li class="header-information-item">
-                    <a href="header-information-item-link">
+                    <a href="/account">
                       <i class="fas fa-user header-information-item-font"></i>
                     </a>
                   </li>

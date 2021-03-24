@@ -90,8 +90,9 @@
                     <td><?php echo number_format($cart->price*$cart->quantum, 0, '', ','); ?> đ</td>
                     <td><a href="{{url('/cart/delete/'.$cart->id)}}" style="color:black"><i class="far fa-trash-alt"></i></a></td>
                     <?php
-                    
-                    $total=$total+($cart->price*$cart->quantum);
+                    if ($cart) {
+                      $total=$total+($cart->price*$cart->quantum);
+                    }
                     ?>
                   </tr>
                 @endforeach
@@ -104,12 +105,14 @@
                 <div class="total-cart">
                     <div class="subtotal">
                         <span>Tổng tiền</span>
-                        <span class="total"><?php 
-                        echo number_format($total, 0, '', ',');
-                         ?>đ</span>
+                        <span class="total"><?php
+                        if ($cart) {
+                          echo number_format($total, 0, '', ',');
+                        } 
+                        ?>đ</span>
                     </div>
                     <div class="final-total">
-                        <button>Thanh toán</button>
+                        <button type="submit">Thanh toán</button>
                     </div>
                 </div>
             </div>

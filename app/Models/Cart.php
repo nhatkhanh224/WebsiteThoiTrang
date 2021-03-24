@@ -9,5 +9,5 @@ class Cart extends Model
 {
     protected $table='cart';
     protected $primaryKey='id';
-    protected $fillable=['id_product','product_name','product_code','color','price','thumbnail','size','quantum','id_user','session_id'];
+    protected $fillable=['id_product','product_name','product_code','color','price','thumbnail','size','quantum','user_email','session_id'];
 }

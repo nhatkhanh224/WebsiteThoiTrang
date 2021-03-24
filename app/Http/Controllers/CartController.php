@@ -7,20 +7,27 @@ use App\Models\Cart;
 use Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
    public function index(){
         $cartCookie=Cookie::get('cart');
+        $email=Auth::user()->email;
         if ($cartCookie) {
             $cart=Cart::where('session_id',$cartCookie)->get();
-        }else{
+        }else if ($email) {
+            $cart=Cart::where('user_email',$email)->get();
+        }
+        else{
             $cart=null;
         }
+
         return view('web/cart')->with(compact('cart'));
    }
    public function addToCart(Request $request){
        $cartCookie=$request->cookies->get('cart');
+       $email=Auth::user()->email;
        if ($cartCookie) {
            $session_id=$cartCookie;
        }
@@ -42,6 +49,9 @@ class CartController extends Controller
            $cart->size=$data['size'];
            $cart->color=$data['color'];
            $cart->quantum=1;
+           if ($email) {
+               $cart->user_email=$email;
+           }
            if ($cartCookie) {
                $cart->session_id=$cartCookie;
            }
@@ -64,5 +74,17 @@ class CartController extends Controller
             Cart::where('id',$id)->delete();
             return redirect('/cart');
         }
+    }
+    public function payment(Request $request){
+        $email=Auth::user()->email;
+        $cartCookie=$request->cookies->get('cart');
+        $user=Auth::user();
+        if ($email) {
+            $cart=Cart::where('user_email',$email)->get();
+        }
+        else{
+            $cart=Cart::where('session_id',$cartCookie)->get();
+        }
+        return view('web/payment')->with(compact('cart','user'));
     }
 }

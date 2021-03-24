@@ -44,7 +44,11 @@ Route::match(['get', 'post'],'/addToCart', [CartController::class, 'addToCart'])
 Route::match(['get', 'post'],'/cart', [CartController::class, 'index']);
 Route::match(['get', 'post'],'/cart/update/{id}/{number}', [CartController::class, 'updateQuantity']);
 Route::match(['get', 'post'],'/cart/delete/{id}', [CartController::class, 'deleteCart']);
+Route::match(['get', 'post'],'/payment', [CartController::class, 'payment']);
+Route::match(['get', 'post'],'/order', [CartController::class, 'order']);
 //Account
 Route::get('/account',[UserController::class,'index']);
+Route::post('/login',[UserController::class,'login']);
+
 
 
