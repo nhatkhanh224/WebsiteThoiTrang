@@ -133,7 +133,7 @@
 .final-total button{
   width: 148px;
 }
-.final-total button,
+.final-total a,
 .continue-buy-button {
   display: inline-block;
   border: 1px solid transparent;

@@ -33,6 +33,7 @@
               <div class="form-login">
                 <h3 class="title">ĐĂNG NHẬP</h3>
                 <form action="{{url('/login')}}" method="POST" name="formLogin">
+                {{csrf_field()}}
                   <div class="form-group">
                     <span class="icon"><i class="fas fa-envelope"></i></span>
                     <input

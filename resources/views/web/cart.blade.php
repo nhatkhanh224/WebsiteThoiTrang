@@ -112,7 +112,7 @@
                         ?>đ</span>
                     </div>
                     <div class="final-total">
-                        <button type="submit">Thanh toán</button>
+                        <a href="/payment">THANH TOÁN</a>
                     </div>
                 </div>
             </div>

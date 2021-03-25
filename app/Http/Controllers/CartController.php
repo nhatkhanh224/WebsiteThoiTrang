@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Order;
 use Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
@@ -13,21 +14,28 @@ class CartController extends Controller
 {
    public function index(){
         $cartCookie=Cookie::get('cart');
-        $email=Auth::user()->email;
-        if ($cartCookie) {
-            $cart=Cart::where('session_id',$cartCookie)->get();
-        }else if ($email) {
+        if (Auth::check()) {
+            $email=Auth::user()->email;
             $cart=Cart::where('user_email',$email)->get();
         }
-        else{
-            $cart=null;
+        else {
+            $cart=Cart::where('session_id',$cartCookie)->get();
         }
+        
+        
+        // if ($cartCookie) {
+            
+        // }else if ($email) {
+            
+        // }
+        // else{
+        //     $cart=null;
+        // }
 
         return view('web/cart')->with(compact('cart'));
    }
    public function addToCart(Request $request){
        $cartCookie=$request->cookies->get('cart');
-       $email=Auth::user()->email;
        if ($cartCookie) {
            $session_id=$cartCookie;
        }
@@ -49,7 +57,8 @@ class CartController extends Controller
            $cart->size=$data['size'];
            $cart->color=$data['color'];
            $cart->quantum=1;
-           if ($email) {
+           if (Auth::check()) {
+                $email=Auth::user()->email;
                $cart->user_email=$email;
            }
            if ($cartCookie) {
@@ -76,15 +85,32 @@ class CartController extends Controller
         }
     }
     public function payment(Request $request){
-        $email=Auth::user()->email;
-        $cartCookie=$request->cookies->get('cart');
-        $user=Auth::user();
-        if ($email) {
+        if (Auth::check()) {
+            $email=Auth::user()->email;
+            $user=Auth::user();
             $cart=Cart::where('user_email',$email)->get();
         }
         else{
+            $user=null;
+            $cartCookie=$request->cookies->get('cart');
             $cart=Cart::where('session_id',$cartCookie)->get();
         }
         return view('web/payment')->with(compact('cart','user'));
+    }
+    public function order(Request $request){
+        if ($request->isMethod('POST')) {
+            $data=$request->all();
+            $order=new Order();
+            $order->user_email=$data['email'];
+            $order->name=$data['name'];
+            $order->address=$data['address'];
+            $order->phone=$data['phone'];
+            $order->ship=$data['ship'];
+            $order->total=$data['total'];
+            $order->option=$data['option'];
+            $order->status='Mới đặt hàng';
+            $order->save();
+            return redirect('/');
+        }
     }
 }

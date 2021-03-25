@@ -23,4 +23,9 @@ class UserController extends Controller
         }
         
     }
+    public function logout(){
+        Auth::logout();
+        Cookie::queue(Cookie::forget('cart'));
+        return redirect('/');
+    }
 }

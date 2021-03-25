@@ -49,6 +49,7 @@ Route::match(['get', 'post'],'/order', [CartController::class, 'order']);
 //Account
 Route::get('/account',[UserController::class,'index']);
 Route::post('/login',[UserController::class,'login']);
+Route::get('/logout',[UserController::class,'logout']);
 
 
 

@@ -27,41 +27,46 @@
   <body>
     <div class="app">
       <div class="container">
+        <form action="{{url('/order')}}" method="POST">
+        {{csrf_field()}}
         <div class="content">
           <div class="input-information">
             <div class="input-information-left">
               <h2 class="input-information-left-title">Dirtycoins</h2>
               <div class="input-information-left-header">
                 <span>Thông tin mua hàng</span>
+                @if(empty($user))
                 <a href="">Đăng nhập</a>
+                @endif
               </div>
               <div class="input-information-body">
-                <form action="">
+                
                   <div class="input-information-email">
-                    <input type="text" placeholder="Email" value="{{$user->email}}" />
+                    <input type="text" placeholder="Email" name="email" @if($user!=null) value="{{$user->email}}" @endif  />
                   </div>
                   <div class="input-information-name">
-                    <input type="text" placeholder="Họ và tên" value="{{$user->name}}" />
+                    <input type="text" placeholder="Họ và tên" name="name" @if($user!=null) value="{{$user->name}}" @endif/>
                   </div>
                   <div class="input-information-phone">
-                    <input type="text" placeholder="Số điện thoại(tùy chọn)" value="{{$user->phone}}" />
+                    <input type="text" placeholder="Số điện thoại(tùy chọn)" name="phone" @if($user!=null) value="{{$user->phone}}" @endif/>
                   </div>
                   <div class="input-information-address">
-                    <input type="text" placeholder="Địa chỉ(tùy chọn)" value="{{$user->address}}" />
+                    <input type="text" placeholder="Địa chỉ(tùy chọn)" name="address" @if($user!=null) value="{{$user->address}}" @endif />
                   </div>
 
                   
                   <div>
                     <textarea
                       class="textarea-input"
-                      name=""
+                      name="option"
                       id=""
                       cols="50"
                       rows="2"
                       placeholder="Ghi chú(tùy chọn)"
+                      
                     ></textarea>
                   </div>
-                </form>
+                
               </div>
             </div>
             <div class="input-information-right">
@@ -70,6 +75,7 @@
                 <div class="input-information-right-header-content">
                   <span>Giao hàng tận nơi</span>
                   <span>40.000 đ</span>
+                  
                 </div>
               </div>
               <div class="input-information-shipment">
@@ -87,7 +93,10 @@
             <div class="container">
               <h3>Đơn hàng</h3>
               <hr />
+              <?php $total = 0; ?>
+              
               @foreach($cart as $item)
+              
               <div class="order-product">
                 <div class="product-infor">
                     <img
@@ -98,9 +107,11 @@
                   <span>{{$item->product_name}}</span>
                 </div>
                 <div class="order-product-price">
-                  <span>4.200.000 đ</span>
+                  <span><?php echo number_format($item->price*$item->quantum, 0, '', ','); ?> đ</span>
                 </div>
               </div>
+              <?php $total=$total+($item->price*$item->quantum); ?>
+              
               @endforeach
               <hr />
               <div class="order-product-discount">
@@ -113,7 +124,7 @@
                   <tbody>
                     <tr>
                       <th>Tạm tính</th>
-                      <td>2.100.000 đ</td>
+                      <td><?php echo number_format($total, 0, '', ','); ?> đ</td>
                     </tr>
                     <tr>
                       <th>Phí vận chuyển</th>
@@ -121,18 +132,21 @@
                     </tr>
                     <tr>
                       <th>Tổng cộng</th>
-                      <td>2.100.000 đ</td>
+                      <td><?php echo number_format($total+40000, 0, '', ','); ?> đ</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+              <input type="hidden" name="ship" value="40000">
+              <input type="hidden" name="total" value="<?php echo $total ; ?>">
               <div class="order-option">
-                <a href="cart.html">Quay về giỏ hàng</a>
+                <a href="/cart">Quay về giỏ hàng</a>
                 <button type="submit">ĐẶT HÀNG</button>
               </div>
             </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
   </body>

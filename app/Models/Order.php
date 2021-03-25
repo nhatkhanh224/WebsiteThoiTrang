@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    use HasFactory;
+    protected $table='order';
+    protected $primaryKey='id';
+    protected $fillable=['user_email','name','address','phone','ship','coupon','coupon_money','total','status','option'];
 }
+

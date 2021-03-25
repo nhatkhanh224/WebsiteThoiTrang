@@ -24,6 +24,7 @@ class CreateOrder extends Migration
             $table->double('coupon_money');
             $table->double('total');
             $table->string('status');
+            $table->foreign('id')->references('order_id')->on('order_product');
             $table->timestamps();
         });
     }
