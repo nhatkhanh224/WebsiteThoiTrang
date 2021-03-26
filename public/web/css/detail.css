@@ -437,3 +437,21 @@ color: #f1f1f1;
 .menu-close:hover{
 cursor: pointer;
 }
+.header-information-item{
+  position:relative;
+}
+.cart-count{
+  position:absolute;
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  left:22px;
+  top:-12px;
+}
+.cart-count span {
+  padding-left:7px;
+  color: #fff;
+  left:15px;
+}

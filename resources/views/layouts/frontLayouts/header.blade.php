@@ -1,3 +1,18 @@
+<?php
+use App\Models\Cart;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
+
+$cartCookie=Cookie::get('cart');
+if (Auth::check()) {
+    $email=Auth::user()->email;
+    $countCart=Cart::where('user_email',$email)->sum('quantum');
+}
+else {
+    
+    $countCart=Cart::where('session_id',$cartCookie)->sum('quantum');
+}
+?>
 <div class="header sticky-top">
         <div class="container-fluid">
           <div class="row">
@@ -100,10 +115,12 @@
                     </a>
                   </li>
                   <li class="header-information-item">
+                    @if($countCart>0)
+                    <div class="cart-count"><span >{{$countCart}}</span></div>
+                    @endif
                     <a href="/cart">
                       <i
-
-                        class="fas fa-shopping-cart header-information-item-font"
+                      class="fas fa-shopping-cart header-information-item-font"
                       ></i>
                     </a>
                   </li>

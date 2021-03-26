@@ -36,7 +36,7 @@
               <div class="input-information-left-header">
                 <span>Thông tin mua hàng</span>
                 @if(empty($user))
-                <a href="">Đăng nhập</a>
+                <a href="/account">Đăng nhập</a>
                 @endif
               </div>
               <div class="input-information-body">

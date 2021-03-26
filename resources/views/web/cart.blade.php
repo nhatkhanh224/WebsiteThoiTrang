@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{asset('web/css/responsive.css')}}" />
   </head>
   <body>
+
     <div id="overlay" onclick="off()"></div>
     <div class="app">
     @include('layouts.frontLayouts.header',['categories'=>\App\Models\Category::all()])
@@ -31,9 +32,13 @@
       <div class="cart">
         <div class="container">
           <h3 class="cart-title">GIỎ HÀNG</h3>
+          @if($countCart==0)
+                
+                <span>Không có sản phẩm <a href="/">Quay lại trang chủ</a></span>
+                @endif
           <form action="">
           <div class="row">
-          
+          @if ($countCart>0)
             <div class="col-md-8">
               <table class="table ">
                 <thead>
@@ -46,10 +51,8 @@
                 </thead>
                 <tbody>
                 
-                @if(is_null($cart))
                 
-                <span>Không có sản phẩm <a href="/">Quay lại trang chủ</a></span>
-                @else
+                
                 <?php $total=0; ?>
                 @foreach($cart as $cart)
                   <tr>
@@ -96,13 +99,14 @@
                     ?>
                   </tr>
                 @endforeach
-                @endif
+                
 
                 </tbody>
               </table>
             </div>
             <div class="col-md-4">
                 <div class="total-cart">
+                
                     <div class="subtotal">
                         <span>Tổng tiền</span>
                         <span class="total"><?php
@@ -111,18 +115,21 @@
                         } 
                         ?>đ</span>
                     </div>
+                    
                     <div class="final-total">
                         <a href="/payment">THANH TOÁN</a>
                     </div>
+                    
                 </div>
             </div>
           </div>
+          
           </form>
           
           <div class="continue-buy">
             <button class="continue-buy-button"><a href="/">Tiếp tục mua sắm</a></button>
           </div>
-          
+          @endif
         </div>
         
       </div>

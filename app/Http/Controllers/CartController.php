@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderProduct;
 use Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
@@ -17,9 +18,11 @@ class CartController extends Controller
         if (Auth::check()) {
             $email=Auth::user()->email;
             $cart=Cart::where('user_email',$email)->get();
+            $countCart=Cart::where('user_email',$email)->count();
         }
         else {
             $cart=Cart::where('session_id',$cartCookie)->get();
+            $countCart=Cart::where('session_id',$cartCookie)->count();
         }
         
         
@@ -32,7 +35,7 @@ class CartController extends Controller
         //     $cart=null;
         // }
 
-        return view('web/cart')->with(compact('cart'));
+        return view('web/cart')->with(compact('cart','countCart'));
    }
    public function addToCart(Request $request){
        $cartCookie=$request->cookies->get('cart');
@@ -98,6 +101,8 @@ class CartController extends Controller
         return view('web/payment')->with(compact('cart','user'));
     }
     public function order(Request $request){
+        
+        $cartCookie=Cookie::get('cart');
         if ($request->isMethod('POST')) {
             $data=$request->all();
             $order=new Order();
@@ -110,7 +115,36 @@ class CartController extends Controller
             $order->option=$data['option'];
             $order->status='Mới đặt hàng';
             $order->save();
-            return redirect('/');
+            $order_id=$order->id;
+            
+            if (Auth::check()) {
+                $email=Auth::user()->email;
+                $cart=Cart::where('user_email',$email)->get();
+            }else {
+                $cart=Cart::where('session_id',$cartCookie)->get();
+            }
+            foreach($cart as $cart) {
+                $order_product=new OrderProduct();
+                $order_product->order_id=$order_id;
+                $order_product->product_id=$cart->id_product;
+                $order_product->product_code=$cart->product_code;
+                $order_product->product_name=$cart->product_name;
+                $order_product->size=$cart->size;
+                $order_product->price=$cart->price;
+                $order_product->quantum=$cart->quantum;
+                $order_product->thumbnail=$cart->thumbnail;
+                $order_product->save();
+
+            }
+            if (Auth::check()) {
+               $email=Auth::user()->email;
+               Cart::where('user_email',$email)->delete();
+            }
+            else {
+                Cart::where('session_id',$cartCookie)->delete();
+            }
         }
+        return redirect('/');
+        
     }
 }
