@@ -63,8 +63,10 @@
             </div>
             <div class="col-md-6">
               <div class="form-login">
-                <h3 class="title">ĐĂNG KÝ THÀNH VIÊN MỚI</h3>
-                <form action="" name="formRegis">
+                <h3 class="title" >ĐĂNG KÝ THÀNH VIÊN MỚI</h3>
+                
+                <form action="{{url('/register')}}" method="POST" name="formRegis">
+                {{csrf_field()}}
                   <div class="form-group">
                     <span class="icon"><i class="fas fa-user"></i></span>
                     <input
@@ -103,7 +105,18 @@
                       type="text"
                       class="form-input"
                       placeholder="Số điện thoại"
-                      name="phoneNumber"
+                      name="phone"
+                      
+                    />
+                    <span class="not-null"> * </span>
+                  </div>
+                  <div class="form-group">
+                    <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                    <input
+                      type="text"
+                      class="form-input"
+                      placeholder="Địa chỉ"
+                      name="address"
                       
                     />
                     <span class="not-null"> * </span>

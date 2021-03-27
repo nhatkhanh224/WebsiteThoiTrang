@@ -109,10 +109,24 @@ else {
                       <i class="fas fa-search header-information-item-font"></i>
                     </a>
                   </li>
-                  <li class="header-information-item">
-                    <a href="/account">
-                      <i class="fas fa-user header-information-item-font"></i>
-                    </a>
+                  <li class="header-navbar-item">
+                    <a class="header-navbar-item-link" href=""><i class="fas fa-user header-information-item-font"></i></a>
+                    <ul class="sub-menu">
+                      @if(!Auth::check())
+                    <li class="sub-menu-item">
+                        <a href="/account">Đăng nhập</a>
+                      </li>
+                      @else
+                      <li class="sub-menu-item">
+                        <a href="/">Thông tin</a>
+                      </li>
+                      <li class="sub-menu-item">
+                        <a href="/logout">Đăng xuất</a>
+                      </li>
+                      @endif
+                      
+                      
+                    </ul>
                   </li>
                   <li class="header-information-item">
                     @if($countCart>0)

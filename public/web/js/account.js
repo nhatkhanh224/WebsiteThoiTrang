@@ -69,7 +69,7 @@ $("form[name='formRegis']").validate({
     },
     name:{
       required:true,
-      minlength: 30,
+      minlength: 5,
 
     },
     surname:{
