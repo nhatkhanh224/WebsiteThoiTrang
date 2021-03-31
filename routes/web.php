@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckLogin;
@@ -37,6 +38,9 @@ Route::group(['middleware' => ['checkLogin']], function () {
     Route::get('/products/trash', [ProductController::class, 'trash']);
     Route::match(['get', 'post'],'/product/restore/{id}', [ProductController::class, 'restore']);
     Route::match(['get', 'post'],'/product/destroy/{id}', [ProductController::class, 'destroy']);
+
+    //COUPON
+    Route::get('/coupon', [CouponController::class, 'index']);
 });
 
 
@@ -49,6 +53,7 @@ Route::match(['get', 'post'],'/cart', [CartController::class, 'index']);
 Route::match(['get', 'post'],'/cart/update/{id}/{number}', [CartController::class, 'updateQuantity']);
 Route::match(['get', 'post'],'/cart/delete/{id}', [CartController::class, 'deleteCart']);
 Route::match(['get', 'post'],'/payment', [CartController::class, 'payment']);
+Route::post('/useCoupon',[CartController::class,'useCoupon']);
 Route::match(['get', 'post'],'/order', [CartController::class, 'order']);
 //Account
 Route::get('/account',[UserController::class,'index']);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Coupon;
 use Session;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-   public function index(){
+   public function index(Request $request){
         $cartCookie=Cookie::get('cart');
         if (Auth::check()) {
             $email=Auth::user()->email;
@@ -24,17 +25,7 @@ class CartController extends Controller
             $cart=Cart::where('session_id',$cartCookie)->get();
             $countCart=Cart::where('session_id',$cartCookie)->count();
         }
-        
-        
-        // if ($cartCookie) {
-            
-        // }else if ($email) {
-            
-        // }
-        // else{
-        //     $cart=null;
-        // }
-
+        $request->session()->forget(['CouponAmount', 'CouponCode']);
         return view('web/cart')->with(compact('cart','countCart'));
    }
    public function addToCart(Request $request){
@@ -100,8 +91,31 @@ class CartController extends Controller
         }
         return view('web/payment')->with(compact('cart','user'));
     }
+    public function useCoupon(Request $request){
+        if ($request->isMethod('POST')) {
+            $data=$request->all();
+            $coupon_name=$data['coupon_name'];
+            $couponCount=Coupon::where('coupon_name',$coupon_name)->count();
+            $counpon=Coupon::where('coupon_name',$coupon_name)->first();
+            $counponDue=$counpon->expiry_date;
+            if ($couponCount==0 || $counponDue<date('Y-m-d')) {
+                return redirect()->back();
+            }
+            $counpon_amount=$counpon->money;
+            Session::put('CouponAmount',$counpon_amount);
+            Session::put('CouponCode',$coupon_name);
+        }
+        return redirect()->back();
+    }
     public function order(Request $request){
-        
+        if ($request->session()->has(['CouponCode','CouponAmount'])) {
+            $coupon_name=session('CouponCode');
+            $coupon_amount=session('CouponAmount');
+        }
+        else{
+            $coupon_name=null;
+            $coupon_amount=null;
+        }
         $cartCookie=Cookie::get('cart');
         if ($request->isMethod('POST')) {
             $data=$request->all();
@@ -111,6 +125,8 @@ class CartController extends Controller
             $order->address=$data['address'];
             $order->phone=$data['phone'];
             $order->ship=$data['ship'];
+            $order->coupon=$coupon_name;
+            $order->coupon_money=$coupon_amount;
             $order->total=$data['total'];
             $order->option=$data['option'];
             $order->status='Mới đặt hàng';
@@ -134,7 +150,6 @@ class CartController extends Controller
                 $order_product->quantum=$cart->quantum;
                 $order_product->thumbnail=$cart->thumbnail;
                 $order_product->save();
-
             }
             if (Auth::check()) {
                $email=Auth::user()->email;
@@ -145,6 +160,5 @@ class CartController extends Controller
             }
         }
         return redirect('/');
-        
     }
 }

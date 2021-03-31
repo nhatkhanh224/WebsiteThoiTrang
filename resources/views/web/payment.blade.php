@@ -27,7 +27,7 @@
   <body>
     <div class="app">
       <div class="container">
-        <form action="{{url('/order')}}" method="POST">
+        <form action="{{url('order')}}" method="POST">
         {{csrf_field()}}
         <div class="content">
           <div class="input-information">
@@ -110,14 +110,24 @@
                   <span><?php echo number_format($item->price*$item->quantum, 0, '', ','); ?> đ</span>
                 </div>
               </div>
-              <?php $total=$total+($item->price*$item->quantum); ?>
+              <?php
+                $total=$total+($item->price*$item->quantum);
+                
+              ?>
+              @if(session()->has('CouponAmount'))
+              <?php $amount=session('CouponAmount');
+              $total=$total-(($total*$amount)/100);  ?>
               
+              @endif
               @endforeach
               <hr />
-              <div class="order-product-discount">
-                <input type="text" placeholder="Nhập mã giảm giá" />
-                <button type="submit">Áp dụng</button>
-              </div>
+              <input type="hidden" name="ship" value="40000">
+              <input type="hidden" name="total" value="<?php echo $total ; ?>">
+              </form>
+              
+              
+              
+              
               <hr />
               <div class="order-summary">
                 <table>
@@ -137,8 +147,7 @@
                   </tbody>
                 </table>
               </div>
-              <input type="hidden" name="ship" value="40000">
-              <input type="hidden" name="total" value="<?php echo $total ; ?>">
+              
               <div class="order-option">
                 <a href="/cart">Quay về giỏ hàng</a>
                 <button type="submit">ĐẶT HÀNG</button>
@@ -146,8 +155,23 @@
             </div>
           </div>
         </div>
-        </form>
+        
+        <form action="{{url('/useCoupon')}}" method="POST" class="formCoupon">{{csrf_field()}}
+        <div class="order-product-discount">
+                <input type="text" placeholder="Nhập mã giảm giá" name="coupon_name" class="order-product-discount-input" />
+                <button type="submit" class="order-product-discount-button">Áp dụng</button>
+              </div></form>
       </div>
     </div>
   </body>
+  <script>
+        var code=$('.order-product-discount-input').val();
+        var couponButton=$('.order-product-discount-button');
+        var formCoupon=$('.formCoupon');
+        console.log(couponButton);
+        couponButton.click(function() {
+          formCoupon.submit();
+        });
+
+  </script>
 </html>

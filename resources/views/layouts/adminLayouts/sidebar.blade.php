@@ -72,6 +72,30 @@
               
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Mã giảm giá
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/category" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách mã giảm giá</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/category/insert" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm mã giảm giá</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
          
           
         </ul>

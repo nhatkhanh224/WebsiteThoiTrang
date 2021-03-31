@@ -17,7 +17,8 @@ class HomeController extends Controller
         $category=Category::where('slug',$slug)->first();
         $id_category=$category->id;
         $product=Product::where('id_category',$id_category)->paginate(6);
-        return view('web/productByCategory')->with(compact('product','category'));
+        return view('web/productByCategory')->with(compact('product','category')
+        );
 
     }
     public function detail(Request $request,$slug=null){
