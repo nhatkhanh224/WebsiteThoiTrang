@@ -24,7 +24,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Danh sách mã giảm giá/h3>
+              <h3 class="card-title">Danh sách mã giảm giá</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -34,8 +34,8 @@
                   <th>STT</th>
                   <th>Mã giảm giá</th>
                   <th>Giảm</th>
-                  <th>Ngày tạo</th>
-                  <th>Thời hạn</th>
+                  <th>Ngày bắt đầu</th>
+                  <th>Ngày kết thúc</th>
                   <th>Tùy chọn</th>
                 </tr>
                 </thead>
@@ -47,9 +47,9 @@
                       {{$coupon->coupon_name}}
                   </td>
                   <td>{{$coupon->money}}</td>
-                  <td>{{$coupon->created_at}}</td>
+                  <td>{{$coupon->start_date}}</td>
                   <td>{{$coupon->expiry_date}}</td>
-                  <td><a href="{{url('category/edit/'.$coupon->id)}}">Edit</a><a href="{{url('category/delete/'.$coupon->id)}}"> Delete</a></td>
+                  <td><a href="{{url('coupon/edit/'.$coupon->id)}}">Edit</a><a href="{{url('coupon/delete/'.$coupon->id)}}"> Delete</a></td>
                   
                 </tr>
                 @endforeach
@@ -60,7 +60,7 @@
                   <th>Mã giảm giá</th>
                   <th>Giảm</th>
                   <th>Ngày tạo</th>
-                  <th>Thời hạn</th>
+                  <th>Ngày kết thúc</th>
                   <th>Tùy chọn</th>
                   
                 </tr>

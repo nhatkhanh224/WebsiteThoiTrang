@@ -41,6 +41,9 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
     //COUPON
     Route::get('/coupon', [CouponController::class, 'index']);
+    Route::match(['get', 'post'],'/coupon/insert', [CouponController::class, 'insert']);
+    Route::match(['get', 'post'],'/coupon/edit/{id}', [CouponController::class, 'edit']);
+    Route::match(['get', 'post'],'/coupon/delete/{id}', [CouponController::class, 'delete']);
 });
 
 

@@ -9,5 +9,6 @@ class Coupon extends Model
 {
     protected $table='coupon';
     protected $primaryKey='id';
-    protected $fillable=['coupon_name','money','type','expiry_date'];
+    protected $dates = ['start_date','expiry_date'];
+    protected $fillable=['coupon_name','money','type','start_date','expiry_date'];
 }

@@ -25,7 +25,7 @@ class CartController extends Controller
             $cart=Cart::where('session_id',$cartCookie)->get();
             $countCart=Cart::where('session_id',$cartCookie)->count();
         }
-        $request->session()->forget(['CouponAmount', 'CouponCode']);
+        $request->session()->forget(['CouponAmount', 'CouponCode','CouponType']);
         return view('web/cart')->with(compact('cart','countCart'));
    }
    public function addToCart(Request $request){
@@ -96,13 +96,16 @@ class CartController extends Controller
             $data=$request->all();
             $coupon_name=$data['coupon_name'];
             $couponCount=Coupon::where('coupon_name',$coupon_name)->count();
-            $counpon=Coupon::where('coupon_name',$coupon_name)->first();
-            $counponDue=$counpon->expiry_date;
-            if ($couponCount==0 || $counponDue<date('Y-m-d')) {
+            $coupon=Coupon::where('coupon_name',$coupon_name)->first();
+            $couponDue=$coupon->expiry_date;
+            $startDate=$coupon->start_date;
+            $coupon_type=$coupon->type;
+            if ($couponCount==0 || $couponDue<date('Y-m-d')) {
                 return redirect()->back();
             }
-            $counpon_amount=$counpon->money;
-            Session::put('CouponAmount',$counpon_amount);
+            $coupon_amount=$coupon->money;
+            Session::put('CouponType',$coupon_type);
+            Session::put('CouponAmount',$coupon_amount);
             Session::put('CouponCode',$coupon_name);
         }
         return redirect()->back();

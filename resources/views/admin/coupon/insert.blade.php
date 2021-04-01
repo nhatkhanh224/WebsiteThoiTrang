@@ -31,18 +31,28 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" method="POST" action="{{url('/category/insert')}}">
+              <form role="form" method="POST" action="{{url('/coupon/insert')}}">
               {{csrf_field()}}
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Loại sản phẩm</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập loại sản phẩm" name="category_name">
+                    <label for="exampleInputEmail1">Mã giảm giá</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nhập mã giảm giá" name="coupon_name">
                   </div>
                   <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Tiêu đề</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
-                 </div>
-                  
+                    <label for="exampleFormControlSelect1">Example select</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="type">
+                      <option value="percent">Giảm theo %</option>
+                      <option value="money">Giảm theo giá tiền</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Giảm bao nhiều</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="money">
+                  </div>
+                  <label >Ngày bắt đầu:</label>
+                  <input type="date" name="start_date">
+                  <label>Ngày kết thúc:</label>
+                  <input type="date" name="expiry_date">
                   
                   
                 </div>

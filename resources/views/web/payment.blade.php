@@ -116,7 +116,13 @@
               ?>
               @if(session()->has('CouponAmount'))
               <?php $amount=session('CouponAmount');
-              $total=$total-(($total*$amount)/100);  ?>
+              $type=session('CouponType');
+              if ($type=='percent') {
+                $total=$total-(($total*$amount)/100);
+              }else{
+                $total=$total-$amount;
+              }
+                ?>
               
               @endif
               @endforeach
