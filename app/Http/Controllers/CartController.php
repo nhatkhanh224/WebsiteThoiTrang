@@ -100,7 +100,7 @@ class CartController extends Controller
             $couponDue=$coupon->expiry_date;
             $startDate=$coupon->start_date;
             $coupon_type=$coupon->type;
-            if ($couponCount==0 || $couponDue<date('Y-m-d')) {
+            if ($couponCount==0 || $couponDue<date('Y-m-d') || $startDate>date('Y-m-d')) {
                 return redirect()->back();
             }
             $coupon_amount=$coupon->money;

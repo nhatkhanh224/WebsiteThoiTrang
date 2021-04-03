@@ -36,10 +36,7 @@ class ProductController extends Controller
                     $medium_image_path='Product/medium/'.$filename;
                     $small_image_path='Product/small/'.$filename;
                     Image::make($img_tmp)->save($large_image_path);
-                    Image::make($img_tmp)->resize(600,600)->save($medium_image_path);
-                    Image::make($img_tmp)->resize(300,300)->save($small_image_path);
                     $product->image=$filename;
-                    
                 }
             }
             $slug=preg_replace('/\s+/', '-', $data['product_name']);
@@ -64,8 +61,6 @@ class ProductController extends Controller
                     $medium_image_path='Product/medium/'.$filename;
                     $small_image_path='Product/small/'.$filename;
                     Image::make($img_tmp)->save($large_image_path);
-                    Image::make($img_tmp)->resize(600,600)->save($medium_image_path);
-                    Image::make($img_tmp)->resize(300,300)->save($small_image_path);
                 }
             }
             else{
@@ -83,7 +78,6 @@ class ProductController extends Controller
             Product::where(['id'=>$id])->delete();
             return redirect('/products');
         }
-        
     }
     public function trash() {
         $deletedProduct=Product::onlyTrashed()->get();
@@ -94,6 +88,9 @@ class ProductController extends Controller
         return redirect('/products');
     }
     public function destroy($id=null) {
+        $large_image_path='Product/large/';
+        $product=Product::withTrashed()->where(['id'=>$id])->first();
+        unlink($large_image_path.$product->image);
         Product::where(['id'=>$id])->forceDelete();
         return redirect('/products');
     }
@@ -117,7 +114,6 @@ class ProductController extends Controller
                     Image::make($img_tmp)->resize(600,600)->save($medium_image_path);
                     Image::make($img_tmp)->resize(300,300)->save($small_image_path);
                     $img->image=$filename;
-                    
                 }
             }
             $img->save();
@@ -127,8 +123,11 @@ class ProductController extends Controller
         return view('admin/product/insert_image')->with(compact('product','productImg'));
     }
     public function delete_product_image($id=null){
+        $large_image_path='Product/large/';
+        $image=ImageProduct::where('id',$id)->first();
         if (!empty($id)) {
            ImageProduct::where('id',$id)->delete();
+           unlink($large_image_path.$image->image);
            return redirect()->back();
         }
     }
