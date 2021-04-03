@@ -25,8 +25,33 @@
   </head>
   <body>
     <div id="overlay" onclick="off()"></div>
+    
     <div class="app">
     @include('layouts.frontLayouts.header',['categories'=>\App\Models\Category::all()])
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+        
+        <h4 class="modal-title"><i class="far fa-check-square"></i>THÊM VÀO GIỎ HÀNG THÀNH CÔNG</h4>
+        <button class="close" onclick="closeModal();"></button>
+        </div>
+        <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-4 col-xs-5">
+            <img style="width: 100%" src="https://bizweb.dktcdn.net/100/369/010/products/dico-polo-3-w.jpg?v=1608052574267" alt="">
+          </div>
+          <div class="col-sm-8 col-xs-7">
+            <h3>Shirt</h3>
+            <span>Số lượng mua: 1</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      <button>Tiếp tục mua sắm</button>
+      <button>Xem giỏ hàng</button>
+      </div>
+      </div>
+    </div>
       <!-- End Header -->
       <div class="product">
         <div class="container">
@@ -76,7 +101,7 @@
                     
                   </select>
                 </div>
-                <button type="submit" class="product-button">THÊM VÀO GIỎ</button>
+                <button type="submit" class="product-button" onclick="showPanel()">THÊM VÀO GIỎ</button>
                 <button class="product-button add-to-cart">MUA NGAY</button>
                 <div class="product-detail">
                   <p>Chi tiết sản phẩm:</p>

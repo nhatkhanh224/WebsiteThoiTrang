@@ -426,7 +426,7 @@ left: 0;
 right: 0;
 bottom: 0;
 background-color: rgba(0,0,0,0.5);
-z-index: 2;
+z-index: 99999;
 cursor: pointer;
 }
 .menu-close{
@@ -454,4 +454,52 @@ cursor: pointer;
   padding-left:7px;
   color: #fff;
   left:15px;
+}
+/* MODAL */
+
+.modal-dialog{
+  display: none;
+  margin: auto;
+  top: 15%;
+  width: 400px;
+  position: absolute;
+  left: 36%;
+  z-index: 99999;
+}
+
+h4.modal-title{
+  color: #000000;
+  font-size: 15px;
+  text-align: center;
+  padding-left: 34px;
+  font-weight: normal;
+}
+.modal-footer{
+  padding-right: 70px;
+}
+.modal-footer button {
+  display: inline-block;
+    float: none;
+    font-size: 14px;
+    height: 35px;
+    padding: 0px 10px;
+    margin: 0px 5px;
+    border: 1px solid #000000;
+    color: #fff;
+    background: #000000;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    text-shadow: none;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.close{
+  background: url(https://bizweb.dktcdn.net/100/369/010/themes/752396/assets/fancybox_sprite.png) top left no-repeat;
+    width: 35px;
+    height: 35px;
+    opacity: 1;
+    filter: alpha(opacity=1);
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }

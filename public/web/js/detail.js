@@ -31,6 +31,8 @@ _gaq.push(["_trackPageview"]);
 var menu = $(".menu-responsive-button");
 var menuContent = $(".menu-responsive-content");
 var overlay = $("#overlay");
+var modal=$('.modal-dialog');
+
 function showMenuRes() {
   overlay.show();
   menuContent.show(400);
@@ -38,6 +40,15 @@ function showMenuRes() {
 function off() {
   overlay.hide();
   menuContent.hide();
+  modal.hide();
+}
+function showPanel() {
+  overlay.show();
+  modal.show();
+}
+function closeModal() {
+  modal.hide();
+  overlay.hide();
 }
 //Contact
 var contactTitle = $(".contact-recommend-title");
