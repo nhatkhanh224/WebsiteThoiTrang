@@ -28,30 +28,8 @@
     
     <div class="app">
     @include('layouts.frontLayouts.header',['categories'=>\App\Models\Category::all()])
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-        
-        <h4 class="modal-title"><i class="far fa-check-square"></i>THÊM VÀO GIỎ HÀNG THÀNH CÔNG</h4>
-        <button class="close" onclick="closeModal();"></button>
-        </div>
-        <div class="modal-body">
-        <div class="row">
-          <div class="col-sm-4 col-xs-5">
-            <img style="width: 100%" src="https://bizweb.dktcdn.net/100/369/010/products/dico-polo-3-w.jpg?v=1608052574267" alt="">
-          </div>
-          <div class="col-sm-8 col-xs-7">
-            <h3>Shirt</h3>
-            <span>Số lượng mua: 1</span>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-      <button>Tiếp tục mua sắm</button>
-      <button>Xem giỏ hàng</button>
-      </div>
-      </div>
-    </div>
+
+    
       <!-- End Header -->
       <div class="product">
         <div class="container">
@@ -76,7 +54,7 @@
             </div>
           
             <div class="col-md-4 col-xs-12 col-sm-12">
-            <form action="{{url('/addToCart')}}" method="POST">
+            <form action="{{url('/addToCart')}}" method="POST" id="formCart">
             {{csrf_field()}}
             <div class="product-information">
                 <input type="hidden" name="id_product" value="{{$product->id}}" />
@@ -101,8 +79,8 @@
                     
                   </select>
                 </div>
-                <button type="submit" class="product-button" onclick="showPanel()">THÊM VÀO GIỎ</button>
-                <button class="product-button add-to-cart">MUA NGAY</button>
+                <button type="submit" class="product-button" data-toggle="modal" data-target="#cart-model" data-id="{{$product->id}}" data-name="{{$product->product_name}}" data-img="{{$product->image}}">THÊM VÀO GIỎ</button>
+                <button type="button" class="product-button add-to-cart">MUA NGAY</button>
                 <div class="product-detail">
                   <p>Chi tiết sản phẩm:</p>
                   <ul>
@@ -231,7 +209,64 @@
       </div>
       @include('layouts.frontLayouts.footer')
     </div>
+
+    <div class="modal fade" id="cart-model" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="far fa-check-square"></i>THÊM VÀO GIỎ HÀNG THÀNH CÔNG</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="loadPage();" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                          <div class="col-sm-4 col-xs-5">
+                            <img style="width: 100%" src="{{asset('Product/large/'.$product->image)}}" alt="" id="product-img">
+                          </div>
+                          <div class="col-sm-8 col-xs-7">
+                            <h3 id="product-name">{{$product->product_name}}</h3>
+                          <span>Số lượng mua: 1</span>
+                          </div>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button onclick="loadPage();">Tiếp tục mua sắm</button>
+                      <button onclick="loadCart();">Xem giỏ hàng</button>
+                    </div>
+                </div>
+            </div>
+    </div>
   </body>
   <script src="{{asset('web/js/multislider.js')}}"></script>
   <script src="{{asset('web/js/detail.js')}}"></script>
+  <script>
+    var imgCart=$('#product-img');
+    var productName=$('#product-name');
+    var name;
+    var img;
+    var formCart=$('#formCart');
+    $('.product-button').click(function (e) {
+      var url="{{url('/addToCart')}}";
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: formCart.serialize(),
+        success: function (data) {
+          $('#cart-model').modal("show");
+          
+        }
+      });
+      return false;
+    });
+    function loadPage() {
+      location.reload();
+    }
+    function loadCart() {
+      window.location.href = "/cart";
+    }
+
+    
+  </script>
 </html>

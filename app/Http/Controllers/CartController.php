@@ -62,7 +62,7 @@ class CartController extends Controller
             $cart->session_id=$session_id;
            }
            $cart->save();
-        //    return redirect('/cart');
+        
        }
     }
     public function updateQuantity($id=null,$number=null){

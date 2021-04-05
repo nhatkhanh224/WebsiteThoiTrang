@@ -42,14 +42,7 @@ function off() {
   menuContent.hide();
   modal.hide();
 }
-function showPanel() {
-  overlay.show();
-  modal.show();
-}
-function closeModal() {
-  modal.hide();
-  overlay.hide();
-}
+
 //Contact
 var contactTitle = $(".contact-recommend-title");
 var contactContent = $(".contact-recommend-content");
@@ -73,3 +66,5 @@ function showContent(value) {
       break;
   }
 }
+//Add to cart
+
