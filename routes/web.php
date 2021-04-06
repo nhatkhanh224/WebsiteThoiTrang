@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\CheckLogin;
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,10 @@ Route::group(['middleware' => ['checkLogin']], function () {
     Route::match(['get', 'post'],'/coupon/insert', [CouponController::class, 'insert']);
     Route::match(['get', 'post'],'/coupon/edit/{id}', [CouponController::class, 'edit']);
     Route::match(['get', 'post'],'/coupon/delete/{id}', [CouponController::class, 'delete']);
+    //ORDER
+    Route::get('/review-order', [OrderController::class, 'index']);
+    Route::get('/review-order/detail/{id}', [OrderController::class, 'detail']);
+    Route::match(['get', 'post'],'/review-order/status/{id}', [OrderController::class, 'setStatus']);
 });
 
 
