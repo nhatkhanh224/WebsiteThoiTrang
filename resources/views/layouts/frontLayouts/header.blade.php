@@ -123,6 +123,9 @@ else {
                       <li class="sub-menu-item">
                         <a href="/logout">Đăng xuất</a>
                       </li>
+                      <li class="sub-menu-item">
+                        <a href="/history-order">Lịch sử đơn hàng</a>
+                      </li>
                       @endif
                       
                       

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ImageProduct;
-
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,6 +27,12 @@ class HomeController extends Controller
         $id_product=$product->id;
         $image_product=ImageProduct::where('id_product',$id_product)->get();
         return view('web/detail')->with(compact('product','image_product'));
+    }
+    public function history(){
+        $emails = Auth::user()->email;
+        $name=Auth::user()->name;
+        $order = Order::where('user_email',$emails)->orderBy('id','desc')->get();
+        return view('web/history')->with(compact('order','name'));
     }
     
 }

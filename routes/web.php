@@ -49,6 +49,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
     Route::get('/review-order', [OrderController::class, 'index']);
     Route::get('/review-order/detail/{id}', [OrderController::class, 'detail']);
     Route::match(['get', 'post'],'/review-order/status/{id}', [OrderController::class, 'setStatus']);
+
+    
 });
 
 
@@ -63,6 +65,7 @@ Route::match(['get', 'post'],'/cart/delete/{id}', [CartController::class, 'delet
 Route::match(['get', 'post'],'/payment', [CartController::class, 'payment']);
 Route::post('/useCoupon',[CartController::class,'useCoupon']);
 Route::match(['get', 'post'],'/order', [CartController::class, 'order']);
+Route::get('/history-order',[HomeController::class,'history']);
 //Account
 Route::get('/account',[UserController::class,'index']);
 Route::post('/login',[UserController::class,'login']);

@@ -9,7 +9,7 @@ use App\Models\Product;
 class OrderController extends Controller
 {
     public function index() {
-        $order=Order::all();
+        $order=Order::all()->sortByDesc("id");
         return view('admin/order/index')->with(compact('order'));
     }
     public function detail ($id=null) {
