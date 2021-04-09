@@ -287,3 +287,22 @@
   color: #fff;
   left:15px;
 }
+.input-search{
+  position: absolute;
+  padding: 15px 20px;
+  right: 0;
+  display: none;
+}
+.input-search-button{
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 18px;
+  color: #202020;
+  font-size: 16px;
+}
+.header-information-search:hover .input-search {
+  display: block;
+}

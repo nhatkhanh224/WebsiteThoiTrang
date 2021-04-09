@@ -66,6 +66,7 @@ Route::match(['get', 'post'],'/payment', [CartController::class, 'payment']);
 Route::post('/useCoupon',[CartController::class,'useCoupon']);
 Route::match(['get', 'post'],'/order', [CartController::class, 'order']);
 Route::get('/history-order',[HomeController::class,'history']);
+Route::post('/search-product',[HomeController::class,'search']);
 //Account
 Route::get('/account',[UserController::class,'index']);
 Route::post('/login',[UserController::class,'login']);

@@ -104,11 +104,23 @@ else {
             <div class="col-md-2 navbar-main">
               <div class="header-information">
                 <ul class="header-information-list">
-                  <li class="header-information-item">
-                    <a href="header-information-item-link">
+  
+
+                  <li class="header-information-item header-information-search ">
+                    
                       <i class="fas fa-search header-information-item-font"></i>
-                    </a>
+                      <form action="{{url('/search-product')}}" method="POST">
+                      {{csrf_field()}}
+                      <div class="input-search">
+                        <input type="text" placeholder="Tìm kiếm ..." name="key">
+                        <button type="submit" class="input-search-button"><i class="fas fa-search"></i></button>
+                      </div>
+                      </form>
+                      
+                    
                   </li>
+
+                  
                   <li class="header-navbar-item">
                     <a class="header-navbar-item-link" href=""><i class="fas fa-user header-information-item-font"></i></a>
                     <ul class="sub-menu">

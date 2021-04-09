@@ -34,5 +34,14 @@ class HomeController extends Controller
         $order = Order::where('user_email',$emails)->orderBy('id','desc')->get();
         return view('web/history')->with(compact('order','name'));
     }
+    public function search(Request $request){
+        if ($request->isMethod('POST')) {
+            $data=$request->all();
+            $key=$data['key'];
+            $product=Product::where('product_name','like','%'.$key.'%')->get();
+            $count=Product::where('product_name','like','%'.$key.'%')->count();
+            return view('web/search')->with(compact('product','key','count'));
+        }
+    }
     
 }
