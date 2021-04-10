@@ -39,7 +39,14 @@
                   style="margin-top: 10px;">Action</button>
             </div>
             </div>
-             
+            
+
+            @if(session('alert'))
+
+              <section class='alert alert-success'>{{session('alert')}}</section>
+            
+            @endif  
+
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">

@@ -42,7 +42,8 @@ class ProductController extends Controller
             $slug=preg_replace('/\s+/', '-', $data['product_name']);
             $product->slug=strtolower($slug);
             $product->save();
-            return redirect('/products');
+            $success='Thêm thành công !';
+            return redirect('/products')->with('alert',$success);
         }
         return view('admin/product/insert')->with(compact('category'));
     }
@@ -69,14 +70,16 @@ class ProductController extends Controller
         
             Product::where(['id'=>$id])->update(['product_name'=>$data['product_name'],'image'=>$filename,'code'=>$data['code'],
             'color'=>$data['color'],'description'=>$data['description'],'price'=>$data['price']]);
-            return redirect('/products');
+            $success='Sửa thành công !';
+            return redirect('/products')->with('alert',$success);
         }
         return view('admin/product/edit')->with(compact('oldProduct','category'));
     }
     public function delete($id=null) {
         if (!empty($id)) {
             Product::where(['id'=>$id])->delete();
-            return redirect('/products');
+            $success='Sản phẩm đã được đưa vào thùng rác !';
+            return redirect('/products')->with('alert',$success);
         }
     }
     public function trash() {
@@ -85,14 +88,16 @@ class ProductController extends Controller
     }
     public function restore($id=null) {
         Product::where(['id'=>$id])->restore();
-        return redirect('/products');
+        $success='Khôi phục thành công !';
+        return redirect('/products')->with('alert',$success);
     }
     public function destroy($id=null) {
         $large_image_path='Product/large/';
         $product=Product::withTrashed()->where(['id'=>$id])->first();
         unlink($large_image_path.$product->image);
         Product::where(['id'=>$id])->forceDelete();
-        return redirect('/products');
+        $success="Xóa thành công !";
+        return redirect('/products')->with('alert',$success);
     }
     public function insert_image(Request $request,$id=null) {
         $product=Product::find($id);
@@ -117,7 +122,8 @@ class ProductController extends Controller
                 }
             }
             $img->save();
-            return redirect()->back();
+            $success="Thêm thành công";
+            return redirect()->back()->with('alert',$success);
             
         }
         return view('admin/product/insert_image')->with(compact('product','productImg'));

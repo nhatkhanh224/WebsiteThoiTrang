@@ -18,7 +18,8 @@ class CategoryController extends Controller
             $category->category_name = $data['category_name'];
             $category->description = $data['description'];
             $category->save();
-            return redirect('/category');
+            $success="Thêm loại sản phẩm thành công";
+            return redirect('/category')->with('alert',$success);
         }
         return view('admin/category/insert');
     }
@@ -26,7 +27,8 @@ class CategoryController extends Controller
         if ($request->isMethod('POST')) {
             $data = $request->all();
             Category::where(['id'=>$id])->update(['category_name'=>$data['category_name'],'description'=>$data['description']]);
-            return redirect('/category');
+            $success="Sửa loại sản phẩm thành công";
+            return redirect('/category')->with('alert',$success);
         }
         $oldCategory = Category::where(['id'=>$id])->first();
         return view('admin/category/edit')->with(compact('oldCategory'));
@@ -34,7 +36,8 @@ class CategoryController extends Controller
     public function delete($id=null) {
         if (!empty($id)) {
             Category::where(['id'=>$id])->delete();
-            return redirect('/category');
+            $success="Xóa thành công";
+            return redirect('/category')->with('alert',$success);
         }
         
     }

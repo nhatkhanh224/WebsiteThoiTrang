@@ -26,6 +26,11 @@
             <div class="card-header">
               <h3 class="card-title">Danh sách loại sản phẩm</h3>
             </div>
+            @if(session('alert'))
+
+              <section class='alert alert-success'>{{session('alert')}}</section>
+            
+            @endif  
             <!-- /.card-header -->
             <div class="card-body">
               <table id="example2" class="table table-bordered table-hover">

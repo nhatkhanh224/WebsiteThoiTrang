@@ -21,15 +21,17 @@ class CouponController extends Controller
             $coupon->expiry_date=$data['expiry_date'];
             $coupon->start_date=$data['start_date'];
             $coupon->save();
-            return redirect('/coupon');
+            $success="Thêm mã giảm giá thành công";
+            return redirect('/coupon')->with('alert',$success);
         }
-        return view('admin/coupon/insert');
+        return view('admin/coupon/insert')->with('alert',$success);
     }
     public function edit(Request $request,$id=null){
         if ($request->isMethod('POST')) {
             $data = $request->all();
             Coupon::where(['id'=>$id])->update(['coupon_name'=>$data['coupon_name'],'money'=>$data['money'],'type'=>$data['type'],'start_date'=>$data['start_date'],'expiry_date'=>$data['expiry_date']]);
-            return redirect('/coupon');
+            $success="Sửa mã giảm giá thành công";
+            return redirect('/coupon')->with('alert',$success);
         }
         $oldCoupon = Coupon::where(['id'=>$id])->first();
         $start_date = Carbon::parse($oldCoupon->start_date)->format('Y-m-d');
@@ -39,7 +41,8 @@ class CouponController extends Controller
     public function delete($id=null){
         if (!empty($id)) {
             Coupon::where(['id'=>$id])->delete();
-            return redirect('/coupon');
+            $success="Xóa thành công";
+            return redirect('/coupon')->with('alert',$success);
         }
     }
 }
