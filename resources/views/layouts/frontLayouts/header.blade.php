@@ -130,7 +130,7 @@ else {
                       </li>
                       @else
                       <li class="sub-menu-item">
-                        <a href="/">Thông tin</a>
+                        <a href="/profile">Thông tin</a>
                       </li>
                       <li class="sub-menu-item">
                         <a href="/logout">Đăng xuất</a>

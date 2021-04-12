@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\User;
+use DB;
 
 class UserController extends Controller
 {
@@ -51,5 +52,17 @@ class UserController extends Controller
         Auth::logout();
         Cookie::queue(Cookie::forget('cart'));
         return redirect('/');
+    }
+    public function profile(){
+        $user=Auth::user();
+        return view('web/profile')->with(compact('user'));
+    }
+    public function profile_address(){
+        $province=DB::table('province')->get();
+        return view('web/address')->with(compact('province'));
+    }
+    public function getLocation($id){
+        echo json_encode(DB::table('district')->where('_province_id',$id)->get());  
+            
     }
 }

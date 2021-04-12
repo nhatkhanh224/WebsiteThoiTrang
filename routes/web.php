@@ -72,6 +72,9 @@ Route::get('/account',[UserController::class,'index']);
 Route::post('/login',[UserController::class,'login']);
 Route::post('/register',[UserController::class,'register']);
 Route::get('/logout',[UserController::class,'logout']);
+Route::match(['get', 'post'],'/profile', [UserController::class, 'profile']);
+Route::match(['get', 'post'],'/profile/address', [UserController::class, 'profile_address']);
+Route::get('/getLocation/{id}',[UserController::class,'getLocation']);
 
 
 
