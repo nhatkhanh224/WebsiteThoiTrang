@@ -31,12 +31,13 @@
       <!-- End Header -->
      <div class="container">
     
-        
-        <div class="profile" >
+     <form action="{{url('/profile/address')}}" method="POST">
+     {{csrf_field()}}
+     <div class="profile" >
             <h3>Địa chỉ giao hàng</h3>
             <div class="profile-address">
              
-              <select id="province">
+              <select id="province" name="province">
               <option value="" disabled selected>Chọn Tỉnh/Thành Phố</option>
                 @foreach($province as $pro)
                 <option value="{{$pro->id}}">{{$pro->_name}}</option>
@@ -45,19 +46,21 @@
              
             </div>
             <div class="profile-address">
-              <select id="district">
+              <select id="district" name="district">
                 
                 <option value="">Vui lòng chọn Tỉnh/Thành Phố</option>
                 
               </select>
             </div>
            <div class="profile-address">
-              <input type="text" value="25 Kim Đồng">
+              <input type="text" placeholder="Địa chỉ"  name="street" required >
            </div>
             
             <div><button class="btn btn-success">Lưu</button></div>
             
         </div>
+     </form>
+        
 
      </div>
 

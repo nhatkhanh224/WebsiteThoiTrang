@@ -57,7 +57,18 @@ class UserController extends Controller
         $user=Auth::user();
         return view('web/profile')->with(compact('user'));
     }
-    public function profile_address(){
+    public function profile_address(Request $request){
+        if ($request->isMethod('POST')) {
+            $data=$request->all();
+            $province_id=$data['province'];
+            $district_id=$data['district'];
+            $street=$data['street'];
+            $province=DB::table('province')->where('id',$province_id)->value('_name');
+            $district=DB::table('district')->where('id',$district_id)->value('_name');
+            $address=$street." ".$district." ".$province;
+            User::where(['email'=>Auth::user()->email])->update(['address'=>$address]);
+            return redirect('/profile');
+        }
         $province=DB::table('province')->get();
         return view('web/address')->with(compact('province'));
     }
