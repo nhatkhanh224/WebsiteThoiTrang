@@ -17,7 +17,15 @@ class HomeController extends Controller
     public function productByCategory($slug=null){
         $category=Category::where('slug',$slug)->first();
         $id_category=$category->id;
-        $product=Product::where('id_category',$id_category)->paginate(6);
+        if (!empty($_GET['price'])) {
+            $price=explode('-',$_GET['price']);
+            $min_price=$price[0];
+            $max_price=$price[1];
+            $product=Product::where('id_category',$id_category)->whereBetween('price',[$min_price,$max_price])->paginate(6);
+            
+        }else{
+            $product=Product::where('id_category',$id_category)->paginate(6);
+        }
         return view('web/productByCategory')->with(compact('product','category')
         );
 
@@ -41,6 +49,23 @@ class HomeController extends Controller
             $product=Product::where('product_name','like','%'.$key.'%')->get();
             $count=Product::where('product_name','like','%'.$key.'%')->count();
             return view('web/search')->with(compact('product','key','count'));
+        }
+    }
+    public function filterPrice(Request $request){
+        if ($request->isMethod('POST')) {
+            $data=$request->all();
+            $priceUrl="";
+            if (!empty($data['min_price'])) {
+                if (empty($priceUrl)) {
+                    $priceUrl="&price=".$data['min_price'];
+                }else {
+                    $priceUrl="-".$data['min_price'];
+                }
+            }
+            // echo "<prev>";print_r($data['min_price']);die();
+            $finalUrl="/category/".$data['url']."?".$priceUrl;
+            return redirect($finalUrl);
+            
         }
     }
     

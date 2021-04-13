@@ -65,7 +65,7 @@ class UserController extends Controller
             $street=$data['street'];
             $province=DB::table('province')->where('id',$province_id)->value('_name');
             $district=DB::table('district')->where('id',$district_id)->value('_name');
-            $address=$street." ".$district." ".$province;
+            $address=$street."-".$district."-".$province;
             User::where(['email'=>Auth::user()->email])->update(['address'=>$address]);
             return redirect('/profile');
         }

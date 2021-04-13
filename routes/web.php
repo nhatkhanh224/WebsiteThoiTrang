@@ -58,6 +58,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
 Route::get('/',[HomeController::class,'index']);
 Route::get('/category/{slug}',[HomeController::class,'productByCategory']);
 Route::get('/product/{slug}',[HomeController::class,'detail']);
+Route::match(['get', 'post'],'/filter-price', [HomeController::class, 'filterPrice']);
 Route::match(['get', 'post'],'/addToCart', [CartController::class, 'addToCart']);
 Route::match(['get', 'post'],'/cart', [CartController::class, 'index']);
 Route::match(['get', 'post'],'/cart/update/{id}/{number}', [CartController::class, 'updateQuantity']);

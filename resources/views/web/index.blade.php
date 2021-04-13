@@ -37,19 +37,19 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img
+                src="http://bizweb.dktcdn.net/100/369/010/themes/752396/assets/slide-img1.jpg?1618287106118"
+              />
+              <div class="carousel-caption"></div>
+            </div>
+            <div class="carousel-item">
+              <img
                 src="//bizweb.dktcdn.net/100/369/010/themes/752396/assets/slide-img2.jpg?1606806309918"
               />
               <div class="carousel-caption"></div>
             </div>
             <div class="carousel-item">
               <img
-                src="//bizweb.dktcdn.net/100/369/010/themes/752396/assets/slide-img2.jpg?1605345188748"
-              />
-              <div class="carousel-caption"></div>
-            </div>
-            <div class="carousel-item">
-              <img
-                src="//bizweb.dktcdn.net/100/369/010/themes/752396/assets/slide-img3.jpg?1605345188748"
+                src="http://bizweb.dktcdn.net/100/369/010/themes/752396/assets/slide-img1.jpg?1618287106118"
               />
               <div class="carousel-caption"></div>
             </div>

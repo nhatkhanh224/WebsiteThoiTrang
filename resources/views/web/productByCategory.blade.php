@@ -44,18 +44,40 @@
                 <li class="sort-button">Thứ tự</li>
               </div>
             </ul> -->
+            <form action="{{url('/filter-price')}}" method="POST">
+            {{csrf_field()}}
+            <input type="hidden" value="{{$category->slug}}" name="url">
             <div class="filter-price" onclick="showMenu('filterPrice')">
               <span class="filter-price-title">Lọc giá</span>
               <div class="filter-menu" id="filter-price">
                 <ul>
-                  <li><a href="">Giá dưới 100,000đ</a></li>
-                  <li><a href="">100,000đ-200,000đ</a></li>
-                  <li><a href="">200,000đ-300,000đ</a></li>
-                  <li><a href="">300,000đ-500,000đ</a></li>
-                  <li><a href="">Trên 500,000đ</a></li>
+                  <li>
+                    <input type="checkbox" onchange="javascript:this.form.submit();" value="0-100000" name="min_price">
+                    Giá dưới 100,000đ</li>
+                  <li>
+                    <input type="checkbox" onchange="javascript:this.form.submit();" value="100000-200000" name="min_price">
+                    100,000đ-200,000đ
+                  </li>
+                    
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="200000-300000" name="min_price">
+                    200,000đ-300,000đ
+                  </li>
+                    
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="300000-500000" name="min_price">  
+                  300,000đ-500,000đ
+                  </li>
+                    
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="500000-9999999999" name="min_price">
+                    Trên 500,000đ
+                  </li>
                 </ul>
               </div>
             </div>
+          </form>
+            
 
             <div class="filter-brand" onclick="showMenu('filterBrand')">
               <span class="filter-brand-title">Thương hiệu</span>
