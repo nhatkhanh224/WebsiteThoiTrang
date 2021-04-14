@@ -78,25 +78,6 @@
             </div>
           </form>
             
-
-            <div class="filter-brand" onclick="showMenu('filterBrand')">
-              <span class="filter-brand-title">Thương hiệu</span>
-              <div class="filter-menu" id="filter-brand">
-                <ul>
-                  <li><a href="">DIRTYCOINS</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="filter-type" onclick="showMenu('filterType')">
-              <span class="filter-type-title">Loại</span>
-              <div class="filter-menu" id="filter-type">
-                <ul>
-                  <li><a href="">ACCESSORIES</a></li>
-                  <li><a href="">BACKPACKS</a></li>
-                  <li><a href="">SHIRTS</a></li>
-                </ul>
-              </div>
-            </div>
             <div class="filter-size" onclick="showMenu('filterSize')">
               <span class="filter-size-title">Kích thước</span>
               <div class="filter-menu" id="filter-size">
@@ -108,18 +89,60 @@
                 </ul>
               </div>
             </div>
+            <form action="{{url('/filter-color')}}" method="POST">
+            {{csrf_field()}}
+            <input type="hidden" value="{{$category->slug}}" name="url">
             <div class="filter-color" onclick="showMenu('filterColor')">
               <span class="filter-color-title">Màu</span>
               <div class="filter-menu" id="filter-color">
-                <ul>
-                  <li><a href="">Red</a></li>
-                  <li><a href="">Black</a></li>
-                  <li><a href="">Blue</a></li>
-                  <li><a href="">White</a></li>
-                  <li><a href="">Orange</a></li>
+              <ul>
+                  <li>
+                    <input type="checkbox" onchange="javascript:this.form.submit();" value="Đỏ" name="color">
+                    Đỏ</li>
+                  <li>
+                    <input type="checkbox" onchange="javascript:this.form.submit();" value="Cam" name="color">
+                    Cam
+                  </li>
+                    
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="Vàng" name="color">
+                  Vàng
+                  </li>
+                    
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="Xanh dương" name="color">  
+                  Xanh dương
+                  </li>
+                    
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="Xanh lục" name="color">
+                    Xanh lục
+                  </li>
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="Đen" name="color">
+                    Đen
+                  </li>
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="Trắng" name="color">
+                    Trắng
+                  </li>
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="Nâu" name="color">
+                    Nâu
+                  </li>
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="Tím" name="color">
+                    Tím
+                  </li>
+                  <li>
+                  <input type="checkbox" onchange="javascript:this.form.submit();" value="Hồng" name="color">
+                    Hồng
+                  </li>
                 </ul>
               </div>
             </div>
+            </form>
+            
             <div class="sort">
               <div class="sort-button">
                 <span>Thứ tự</span>

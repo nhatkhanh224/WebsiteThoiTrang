@@ -23,7 +23,13 @@ class HomeController extends Controller
             $max_price=$price[1];
             $product=Product::where('id_category',$id_category)->whereBetween('price',[$min_price,$max_price])->paginate(6);
             
-        }else{
+        }
+        if (!empty($_GET['color'])) {
+            $color=$_GET['color'];
+            $product=Product::where('id_category',$id_category)->where('color',$color)->paginate(6);
+            
+        }
+        else{
             $product=Product::where('id_category',$id_category)->paginate(6);
         }
         return view('web/productByCategory')->with(compact('product','category')
@@ -66,6 +72,21 @@ class HomeController extends Controller
             $finalUrl="/category/".$data['url']."?".$priceUrl;
             return redirect($finalUrl);
             
+        }
+    }
+    public function filterColor(Request $request){
+        if ($request->isMethod('POST')) {
+            $data=$request->all();
+            $colorUrl="";
+            if (!empty($data['color'])) {
+                if (empty($colorUrl)) {
+                    $colorUrl="&color=".$data['color'];
+                }else {
+                    $colorUrl="-".$data['color'];
+                }
+            }
+            $finalUrl="/category/".$data['url']."?".$colorUrl;
+            return redirect($finalUrl);
         }
     }
     
