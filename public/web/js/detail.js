@@ -2,6 +2,9 @@ var image = $(".product-image img").attr("src");
 function changeImage(id) {
   var img_small = $("#" + id).attr("src");
   $(".product-image img").attr("src", img_small);
+  var a = $('#zoom').data('zoom-image');
+  $('#zoom').data("zoom-image", img_small);
+  $('#zoom').elevateZoom();
 }
 //Multi Slide
 $("#basicSlider").multislider({

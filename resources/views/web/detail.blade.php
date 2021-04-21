@@ -38,7 +38,9 @@
               <div class="product-image">
                 <img
                   src="{{asset('Product/large/'.$product->image)}}"
-                  alt="" 
+                  alt=""
+                  data-zoom-image="{{asset('Product/large/'.$product->image)}}"
+                  id="zoom" 
                 />
               </div>
               <div class="product-image-small">
@@ -48,6 +50,8 @@
                   onclick="changeImage('{{$image->id}}')"
                   id="{{$image->id}}"
                   alt=""
+                  
+                   
                 />
               @endforeach
               </div>
@@ -241,6 +245,7 @@
   </body>
   <script src="{{asset('web/js/multislider.js')}}"></script>
   <script src="{{asset('web/js/detail.js')}}"></script>
+  <script src="{{asset('web/js/elevatezoom.js')}}" type="text/javascript"></script>
   <script>
     var imgCart=$('#product-img');
     var productName=$('#product-name');
@@ -266,7 +271,10 @@
     function loadCart() {
       window.location.href = "/cart";
     }
+  </script>
 
-    
+  <script>
+    $('#zoom').elevateZoom();
+   
   </script>
 </html>
