@@ -38,9 +38,15 @@ class HomeController extends Controller
     }
     public function detail(Request $request,$slug=null){
         $product=Product::where('slug',$slug)->first();
+        if (Product::where('id_category',$product->id_category)->count() <3) {
+            $relatedProduct=Product::all();
+        }
+        else {
+            $relatedProduct=Product::where('id_category',$product->id_category)->get();
+        }
         $id_product=$product->id;
         $image_product=ImageProduct::where('id_product',$id_product)->get();
-        return view('web/detail')->with(compact('product','image_product'));
+        return view('web/detail')->with(compact('product','image_product','relatedProduct'));
     }
     public function history(){
         $emails = Auth::user()->email;

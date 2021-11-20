@@ -21,7 +21,7 @@ else {
                 <a href="/"
                   ><img
                     class="header-logo-img"
-                    src="https://bizweb.dktcdn.net/100/369/010/themes/752396/assets/logo.png?1605325979443"
+                    src="http://sapoweb.dktcdn.net/100/369/010/themes/752396/assets/logo.png?1626228390887"
                     alt=""
                 /></a>
               </div>

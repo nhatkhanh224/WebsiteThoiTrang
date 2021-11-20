@@ -103,102 +103,22 @@
           <h2 class="related-product-title">SẢN PHẨM LIÊN QUAN</h2>
           <div id="mixedSlider">
             <div class="MS-content">
+            @foreach ($relatedProduct as $relatedProduct)
               <div class="item">
                 <div class="imgTitle">
+                <a href="/product/{{$relatedProduct->slug}}">
                   <img
-                    src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
+                    src="{{asset('Product/large/'.$relatedProduct->image)}}"
                     alt=""
                   />
+                </a>
                 </div>
                 <div class="product-suggestion-infor">
-                  <h3>Adidas NEO</h3>
-                  <span>2,000,000 đ</span>
+                  <h3>{{$relatedProduct->product_name}}</h3>
+                  <span><?php echo number_format($relatedProduct->price, 0, '', ','); ?> đ</span>
                 </div>
               </div>
-              <div class="item">
-                <div class="imgTitle">
-                  <img
-                    src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
-                    alt=""
-                  />
-                </div>
-                <div class="product-suggestion-infor">
-                  <h3>Adidas NEO</h3>
-                  <span>2,000,000 đ</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="imgTitle">
-                  <img
-                    src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
-                    alt=""
-                  />
-                </div>
-                <div class="product-suggestion-infor">
-                  <h3>Adidas NEO</h3>
-                  <span>2,000,000 đ</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="imgTitle">
-                  <img
-                    src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
-                    alt=""
-                  />
-                </div>
-                <div class="product-suggestion-infor">
-                  <h3>Adidas NEO</h3>
-                  <span>2,000,000 đ</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="imgTitle">
-                  <img
-                    src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
-                    alt=""
-                  />
-                </div>
-                <div class="product-suggestion-infor">
-                  <h3>Adidas NEO</h3>
-                  <span>2,000,000 đ</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="imgTitle">
-                  <img
-                    src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
-                    alt=""
-                  />
-                </div>
-                <div class="product-suggestion-infor">
-                  <h3>Adidas NEO</h3>
-                  <span>2,000,000 đ</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="imgTitle">
-                  <img
-                    src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
-                    alt=""
-                  />
-                </div>
-                <div class="product-suggestion-infor">
-                  <h3>Adidas NEO</h3>
-                  <span>2,000,000 đ</span>
-                </div>
-              </div>
-              <div class="item">
-                <div class="imgTitle">
-                  <img
-                    src="//bizweb.dktcdn.net/thumb/large/100/369/010/products/monarch-butterflys-bla-1-w.jpg?v=1603731135000"
-                    alt=""
-                  />
-                </div>
-                <div class="product-suggestion-infor">
-                  <h3>Adidas NEO</h3>
-                  <span>2,000,000 đ</span>
-                </div>
-              </div>
+            @endforeach
             </div>
             <div class="MS-controls">
               <button class="MS-left">
@@ -275,6 +195,5 @@
 
   <script>
     $('#zoom').elevateZoom();
-   
   </script>
 </html>

@@ -8,6 +8,10 @@
 }
 /* Tablet */
 @media (min-width: 740px) and (max-width: 1023px) {
+  .header-logo {
+    margin-top: 23px;
+    
+  }
   .navbar-main{
     display: none;
   }
@@ -35,6 +39,9 @@
 @media (max-width: 739px) {
     .navbar-main{
         display: none;
+    }
+    .header-logo-img{
+      width: 38%;
     }
     .menu-responsive{
         display: block;

@@ -14,7 +14,8 @@
 }
 
 .header-logo-img {
-  margin-top: 14px;
+  margin-top: 7px;
+  width:100%;
 }
 .header-navbar-main {
   display: flex;
@@ -330,4 +331,117 @@
 }
 .input-search-button:focus .fa-search{
   border:none;
+}
+
+.scrollToTop {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+.scrollToTop::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+.scrollToTop:hover {
+  cursor: pointer;
+  background-color: #333;
+  text-decoration: none;
+}
+.scrollToTop:active {
+  background-color: #555;
+}
+.scrollToTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+/* Loader */
+
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+.circle {
+  height: 40px;
+  margin: 50px auto;
+  position: relative;
+  text-align: center;
+  width: 40px;
+  -webkit-animation: circle_dot 2s infinite linear;
+  animation: circle_dot 2s infinite linear;
+}
+
+.circle1,
+.circle2 {
+  height: 60%;
+  display: inline-block;
+  background-color: #ef5f38;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  width: 60%;
+  -webkit-animation: circle_bounce 2s infinite ease-in-out;
+  animation: circle_bounce 2s infinite ease-in-out;
+}
+
+.circle2 {
+  bottom: 0;
+  top: auto;
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+
+@-webkit-keyframes circle_dot {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes circle_dot {
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes circle_bounce {
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes circle_bounce {
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

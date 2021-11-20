@@ -38,32 +38,35 @@ class CartController extends Controller
         Cookie::queue('cart',$session_id,2592000);
         $cartCookie=Cookie::get('cart');
        }
-    
-    //    echo "<pre>";print_r($cartCookie);die;
+        $cart_count=Cart::where('id_product',$request->id_product)->count();
+        $cart=Cart::where('id_product',$request->id_product)->first();
        if ($request->isMethod('POST')) {
-           $data=$request->all();
-           $cart = new Cart();
-           $cart->id_product=$data['id_product'];
-           $cart->product_name=$data['product_name'];
-           $cart->product_code=$data['product_code'];
-           $cart->price=$data['price'];
-           $cart->thumbnail=$data['thumbnail'];
-           $cart->size=$data['size'];
-           $cart->color=$data['color'];
-           $cart->quantum=1;
-           if (Auth::check()) {
-                $email=Auth::user()->email;
-               $cart->user_email=$email;
+           if ($cart_count>0) {
+            Cart::where('id_product',$request->id_product)->update(['quantum'=>$cart->quantum+=1]);
+           }else{
+            $data=$request->all();
+            $cart = new Cart();
+            $cart->id_product=$data['id_product'];
+            $cart->product_name=$data['product_name'];
+            $cart->product_code=$data['product_code'];
+            $cart->price=$data['price'];
+            $cart->thumbnail=$data['thumbnail'];
+            $cart->size=$data['size'];
+            $cart->color=$data['color'];
+            $cart->quantum=1;
+            if (Auth::check()) {
+                 $email=Auth::user()->email;
+                $cart->user_email=$email;
+            }
+            if ($cartCookie) {
+                $cart->session_id=$cartCookie;
+            }
+            else{
+             $cart->session_id=$session_id;
+            }
+            $cart->save();
            }
-           if ($cartCookie) {
-               $cart->session_id=$cartCookie;
-           }
-           else{
-            $cart->session_id=$session_id;
-           }
-           $cart->save();
-        
-       }
+        }
     }
     public function updateQuantity($id=null,$number=null){
         $cart=Cart::where('id',$id)->first();
